@@ -1,0 +1,24 @@
+{
+  "name": "Aklan Tourism",
+  "short_name": "Aklan Tourism",
+  "description": "Discover the wonders of Aklan — world-class beaches, vibrant festivals, and breathtaking nature.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03082e",
+  "theme_color": "#0b1f45",
+  "icons": [
+    {
+      "src": "/Images/finallogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Images/finallogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["travel", "tourism"],
+  "lang": "en-PH",
+  "orientation": "portrait-primary"
+}

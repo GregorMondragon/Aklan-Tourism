@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aklan-tourism.vercel.app/sitemap.xml

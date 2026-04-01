@@ -1,0 +1,101 @@
+/* ══════════════════════════════════
+   WHY VISIT SECTION
+══════════════════════════════════ */
+.why {
+  padding: clamp(32px, 5vw, 50px) clamp(16px, 5vw, 60px) clamp(48px, 8vw, 110px);
+  background: #eef2f7;
+  text-align: center;
+}
+
+.line {
+  position: absolute;
+  align-self: flex-start;
+  left: clamp(24px, 12%, 150px);
+  right: clamp(24px, 12%, 150px);
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(11, 31, 69, 0.4), transparent);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.why h2 {
+  color: #0b1f45;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  padding-top: 15px;
+  margin-bottom: 0;
+}
+
+.intro {
+  color: #4a6a9e;
+  max-width: 600px;
+  margin: 10px auto 40px;
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.7;
+  padding: 0 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cardWhy {
+  box-shadow: 20px 10px 40px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  text-align: center;
+  color: #0b1f45;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.4s ease, background-color 0.4s ease, transform 0.3s ease;
+}
+
+.cardWhy p {
+  padding: 14px 18px 18px;
+  color: #4a6a9e;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.cardWhy img {
+  width: 100%;
+  height: clamp(180px, 25vw, 300px);
+  object-fit: cover;
+  display: block;
+}
+
+.cardWhy:hover {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
+  background-color: #f4f8ff;
+  transform: translateY(-4px);
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .why {
+    padding: 32px 16px 48px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-top: 16px;
+  }
+
+  .cardWhy img {
+    height: 220px;
+  }
+}

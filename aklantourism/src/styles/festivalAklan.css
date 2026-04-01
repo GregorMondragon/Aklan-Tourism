@@ -1,0 +1,242 @@
+.festival-container {
+  background-color: #eef2f7;
+  padding: clamp(40px, 6vw, 80px) clamp(16px, 4vw, 70px) clamp(32px, 5vw, 40px);
+  color: #0b1f45;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Remove fixed height — let content drive it */
+  min-height: 0;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr;
+  gap: clamp(20px, 4vw, 60px);
+  max-width: 1200px;
+  width: 100%;
+  /* Remove fixed 100vh — let content breathe */
+  align-items: center;
+}
+
+/* ── Image columns ── */
+.left-column,
+.middle-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* Remove fixed 100vh */
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Image sizes — use clamp for fluid scaling */
+.large {
+  height: clamp(200px, 28vw, 450px);
+  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  mask:
+    left var(--_i, ) top var(--_g),
+    bottom var(--_i, ) left var(--_g),
+    top var(--_i, ) right var(--_g),
+    right var(--_i, ) bottom var(--_g);
+  filter: grayscale();
+  transition: .3s linear;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.large:hover {
+  --_i: 10%;
+  filter: grayscale(0);
+}
+
+.small-wide {
+  height: clamp(110px, 14vw, 200px);
+  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  mask:
+    left var(--_i, ) top var(--_g),
+    bottom var(--_i, ) left var(--_g),
+    top var(--_i, ) right var(--_g),
+    right var(--_i, ) bottom var(--_g);
+  filter: grayscale();
+  transition: .3s linear;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.small-wide:hover {
+  --_i: 10%;
+  filter: grayscale(0);
+}
+
+.medium {
+  height: clamp(160px, 22vw, 350px);
+  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  mask:
+    left var(--_i, ) top var(--_g),
+    bottom var(--_i, ) left var(--_g),
+    top var(--_i, ) right var(--_g),
+    right var(--_i, ) bottom var(--_g);
+  filter: grayscale();
+  transition: .3s linear;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.medium:hover {
+  --_i: 10%;
+  filter: grayscale(0);
+}
+
+.medium-tall {
+  height: clamp(180px, 25vw, 400px);
+  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  mask:
+    left var(--_i, ) top var(--_g),
+    bottom var(--_i, ) left var(--_g),
+    top var(--_i, ) right var(--_g),
+    right var(--_i, ) bottom var(--_g);
+  filter: grayscale();
+  transition: .3s linear;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.medium-tall:hover {
+  --_i: 10%;
+  filter: grayscale(0);
+}
+
+/* ── Text / Content Column ── */
+.content-column {
+  padding-left: clamp(0px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  color: #0b1f45;
+}
+
+.underline {
+  width: 120px;
+  height: 3px;
+  margin-top: 20px;
+  background-color: #0b1f45;
+  margin-bottom: 32px;
+}
+
+.title2 {
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 2px;
+  color: #0b1f45;
+}
+
+.descriptionfes {
+  font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+  line-height: 1.7;
+  color: #4a6a9e;
+  margin-bottom: clamp(24px, 4vw, 50px);
+  max-width: 450px;
+}
+
+.learn-btn {
+  background: rgba(11, 31, 69, 0.05);
+  color: #0b1f45;
+  border: 1.5px solid rgba(11, 31, 69, 0.3);
+  padding: 13px 32px;
+  font-size: 0.85rem;
+  font-family: "Ubuntu Condensed", "Ubuntu", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  will-change: transform;
+  width: fit-content;
+  min-height: 48px;
+}
+
+.learn-btn:hover {
+  background: #0b1f45;
+  color: #ffffff;
+  border-color: #0b1f45;
+}
+
+.learn-btn:active {
+  background: rgba(11, 31, 69, 0.8);
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+
+/* Tablet — stack image columns and text */
+@media (max-width: 900px) {
+  .festival-container {
+    padding: 48px 24px 40px;
+    align-items: flex-start;
+  }
+
+  .grid-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* Move content column to span full width below images */
+  .content-column {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    padding-top: 8px;
+    align-items: flex-start;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .festival-container {
+    padding: 40px 16px 36px;
+  }
+
+  .grid-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Show only the left column images on mobile to keep it clean */
+  .middle-column {
+    display: none;
+  }
+
+  .large {
+    height: 240px;
+  }
+
+  .small-wide {
+    height: 150px;
+  }
+
+  .content-column {
+    padding-top: 0;
+  }
+
+  .descriptionfes {
+    max-width: 100%;
+  }
+}

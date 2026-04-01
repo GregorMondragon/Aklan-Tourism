@@ -1,0 +1,274 @@
+/* ─────────────────────────────────────────
+   Contact Us Page Styles
+   Palette: #0b1f45 (Navy), White/Glass
+───────────────────────────────────────── */
+
+.contact-wrapper {
+  font-family: "Ubuntu", "Ubuntu Condensed", sans-serif;
+  background: #0b1f45;
+  /* Uniform brand navy */
+  color: #fff;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+/* ── 1. Hero ── */
+.cu-hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  background: url("/Images/aklantourismpictures/Bongbongon Beach/bongbongon4.jpg") center/cover no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cu-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 31, 69, 0.5), rgba(11, 31, 69, 0.95));
+}
+
+.cu-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 40px;
+}
+
+.cu-hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.cu-hero-content p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 300;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── Content Layout ── */
+.cu-content {
+  max-width: 1200px;
+  margin: -60px auto 0;
+  padding: 0 40px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ── 2. Developer Profile Box ── */
+.cu-profile {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 50px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+}
+
+.cu-profile:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.cu-profile-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.cu-profile-info {
+  flex-grow: 1;
+}
+
+.cu-profile-info h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.cu-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.cu-role-tag {
+  background: rgba(140, 190, 255, 0.15);
+  color: #a0c8ff;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(140, 190, 255, 0.2);
+}
+
+.cu-profile-info p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* ── 3. Contact Form & Info Stack ── */
+.cu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* Info Side */
+.cu-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cu-info-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.cu-info-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(5px);
+}
+
+.cu-icon {
+  font-size: 1.8rem;
+  color: #7ab8ff;
+  margin-top: -2px;
+}
+
+.cu-info-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cu-info-card p {
+  font-size: 0.95rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+/* Form Side */
+.cu-form-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  color: #0b1f45;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cu-form-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.cu-input-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.cu-input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #3b4b6b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cu-input-group input,
+.cu-input-group textarea {
+  width: 100%;
+  background: #f4f7fb;
+  border: 1px solid #d1dceb;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #0b1f45;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.cu-input-group input:focus,
+.cu-input-group textarea:focus {
+  background: #fff;
+  border-color: #0b1f45;
+  box-shadow: 0 4px 15px rgba(11, 31, 69, 0.1);
+}
+
+.cu-submit-btn {
+  width: 100%;
+  background: #0b1f45;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cu-submit-btn:hover {
+  background: #112a5a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 31, 69, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cu-profile {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 30px;
+  }
+
+  .cu-roles {
+    justify-content: center;
+  }
+}

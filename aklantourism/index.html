@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ═══ Favicon & PWA ═══ -->
+    <link rel="icon" type="image/png" href="/Images/finallogo1.png" />
+    <link rel="apple-touch-icon" href="/Images/finallogo1.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0b1f45" />
+
+    <!-- ═══ Primary SEO ═══ -->
+    <title>Aklan Tourism — Discover the Wonders of Aklan, Philippines</title>
+    <meta name="description" content="Explore Aklan's world-class beaches, vibrant festivals, and breathtaking nature. Your guide to Boracay White Beach, Jawili Falls, Bakhawan Eco-Park, Ati-Atihan Festival, and more." />
+    <meta name="keywords" content="Aklan tourism, Boracay, Aklan Philippines, Jawili Falls, Bakhawan Eco-Park, Ati-Atihan Festival, Kalibo, Filipino tourism, Visayas travel" />
+    <meta name="author" content="Aklan Tourism" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://aklan-tourism.vercel.app/" />
+
+    <!-- ═══ Open Graph (Facebook/LinkedIn) ═══ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aklan-tourism.vercel.app/" />
+    <meta property="og:title" content="Aklan Tourism — Gateway to Paradise" />
+    <meta property="og:description" content="Discover world-class beaches, the Ati-Atihan Festival, and breathtaking natural wonders across Aklan, Philippines." />
+    <meta property="og:image" content="https://aklan-tourism.vercel.app/Images/aklantourismpictures/Boracay%20White%20Beach/Boracay1.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_PH" />
+    <meta property="og:site_name" content="Aklan Tourism" />
+
+    <!-- ═══ Twitter Card ═══ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aklan Tourism — Gateway to Paradise" />
+    <meta name="twitter:description" content="Explore Aklan's beaches, festivals, caves, and waterfalls. Discover the undiscovered." />
+    <meta name="twitter:image" content="https://aklan-tourism.vercel.app/Images/aklantourismpictures/Boracay%20White%20Beach/Boracay1.jpg" />
+
+    <!-- ═══ Schema.org Structured Data ═══ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Aklan Province",
+      "description": "A Philippine province in Western Visayas known for Boracay, the Ati-Atihan Festival, Jawili Falls, and pristine natural wonders.",
+      "url": "https://aklan-tourism.vercel.app/",
+      "image": "https://aklan-tourism.vercel.app/Images/aklantourismpictures/Boracay%20White%20Beach/Boracay1.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Western Visayas",
+        "addressCountry": "PH",
+        "addressLocality": "Aklan"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "11.8166",
+        "longitude": "122.0942"
+      },
+      "touristType": ["Beach", "Festival", "Nature", "Cultural Heritage"],
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Aklan"
+      ]
+    }
+    </script>
+
+    <!-- ═══ Global Premium Typography ═══ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
+
+    <style>
+      :root {
+        --font-heading: 'Palanquin Dark', sans-serif;
+        --font-body: 'Montserrat', sans-serif;
+      }
+
+      /* Global CSS Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scroll from any potential overflow */
+      }
+      
+      /* Skip-to-content link for accessibility */
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 16px;
+        background: #0b1f45;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 0 0 12px 12px;
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        z-index: 99999;
+        transition: top 0.3s ease;
+      }
+      .skip-link:focus {
+        top: 0;
+        outline: 3px solid #64a0ff;
+        outline-offset: 2px;
+      }
+
+      /* Apply clean, professional sans-serif to all standard text */
+      body, p, a, li, span, button, input {
+        font-family: var(--font-body) !important;
+      }
+      
+      /* Apply impactful serif to all headings & logos */
+      h1, h2, h3, h4, h5, h6, .logo {
+        font-family: var(--font-heading) !important;
+        letter-spacing: 0.5px;
+      }
+      
+      /* Enhance specific typographic details */
+      h1 { letter-spacing: 1px; }
+      p { letter-spacing: 0.2px; }
+
+      /* Global focus-visible styles for keyboard navigation */
+      *:focus-visible {
+        outline: 3px solid #64a0ff;
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Skip navigation link for assistive technologies -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
