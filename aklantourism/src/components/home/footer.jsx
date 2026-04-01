@@ -11,7 +11,7 @@ import {
   MdOutlinePhone,
   MdOutlineLocationOn,
 } from "react-icons/md";
-import "../../styles/Footer.css";
+import "../../styles/footer.css";
 
 /* ── Animation presets ── */
 const fadeUp = (delay = 0) => ({
