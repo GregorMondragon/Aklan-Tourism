@@ -113,7 +113,7 @@
 .nav-right-section {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   position: relative;
   flex-shrink: 0;
 }
@@ -121,7 +121,7 @@
 .nav-actions-wrapper {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 23px;
 }
 
 /* ── Icon Buttons ───────────────────────── */
@@ -130,8 +130,8 @@
   cursor: pointer;
   transition: 0.3s ease;
   color: rgba(255, 255, 255, 0.85);
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 
   display: flex;
   align-items: center;
@@ -215,7 +215,7 @@
   font-size: 14px;
   transition: all 0.3s ease;
   flex-shrink: 0;
-  width: 15px;
+  width: 12px;
   height: 15px;
   display: flex;
   align-items: center;
@@ -316,12 +316,12 @@
 .hamburger-btn {
   display: none;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.088);
   border-radius: 10px;
   color: #fff;
   font-size: 17px;
-  width: 44px;
-  height: 44px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -359,7 +359,7 @@
   -webkit-backdrop-filter: blur(34px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
   z-index: 1200;
 }
@@ -367,7 +367,8 @@
 .mobile-menu ul {
   list-style: none;
   margin: 0;
-  padding: 10px 8px; /* space around items */
+  padding: 8px 8px;
+  /* space around items */
   display: flex;
   flex-direction: column;
 }
@@ -379,7 +380,8 @@
   padding: 14px 20px;
   margin: 2px;
   cursor: pointer;
-  border-radius: 14px; /* inner pill shape */
+  border-radius: 14px;
+  /* inner pill shape */
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   letter-spacing: 0.4px;
   min-height: 48px;
@@ -541,9 +543,10 @@
   .mobile-menu {
     right: 16px;
   }
-  
+
   .mobile-nav-item {
-    min-height: 52px; /* Ensure highly tappable on small phones */
+    min-height: 52px;
+    /* Ensure highly tappable on small phones */
   }
 }
 
