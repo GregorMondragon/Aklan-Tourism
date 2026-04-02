@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -440,13 +440,15 @@
   }
 
   .featured-container {
-    width: 94%;
-    padding: 32px 0 72px;
+    width: 100%;
+    padding: 32px 16px 72px;
     gap: 48px;
+    box-sizing: border-box;
   }
 
   .featured-content {
     gap: 24px;
+    width: 100%;
   }
 
   .feat-title {
@@ -471,19 +473,29 @@
     transform: scale(0.97);
   }
 
-  .card-active {
-    width: 160px;
-    height: 240px;
-  }
-
-  .card-preview {
-    width: 120px;
-    height: 180px;
+  /* Give card stack side breathing room on mobile */
+  .featured-right {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    align-items: center;
   }
 
   .card-stack {
     gap: 12px;
     height: 280px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card-active {
+    width: 150px;
+    height: 230px;
+  }
+
+  .card-preview {
+    width: 110px;
+    height: 170px;
   }
 }
 
@@ -492,32 +504,36 @@
     font-size: 1.7rem;
   }
 
+  .featured-right {
+    padding: 0 16px;
+  }
+
   .card-active {
-    width: 130px; /* Reduced from 155px to give more side space */
-    height: 195px;
+    width: 125px;
+    height: 190px;
   }
 
   .card-preview {
-    width: 90px; /* Reduced to fit screens under 420px nicely */
-    height: 145px;
+    width: 88px;
+    height: 140px;
   }
 
   .card-stack {
-    gap: 12px;
-    height: 220px;
+    gap: 10px;
+    height: 210px;
     justify-content: center;
     width: 100%;
   }
 
   .feat-nav-btn {
-    width: 44px; /* larger tap target */
+    width: 44px;
     height: 44px;
     font-size: 1.1rem;
   }
 
   .feat-dot {
-    width: 9px; /* easier to tap */
+    width: 9px;
     height: 9px;
-    min-height: 9px; /* Override global min-height */
+    min-height: 9px;
   }
 }

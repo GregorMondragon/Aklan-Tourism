@@ -45,7 +45,7 @@ export default function PageIntro({ onComplete }) {
       {/* ── Top Panel ── */}
       <motion.div
         key="panel-top"
-        style={{ ...panelStyle, top: 0, height: "50vh" }}
+        style={{ ...panelStyle, top: 0, height: "50dvh" }}
         initial={{ y: 0 }}
         animate={{ y: isSplitting ? "-100%" : 0 }}
         transition={{ duration: 1.1, ease: easeSplit }}
@@ -67,7 +67,7 @@ export default function PageIntro({ onComplete }) {
       {/* ── Bottom Panel ── */}
       <motion.div
         key="panel-bottom"
-        style={{ ...panelStyle, bottom: 0, top: "50vh" }}
+        style={{ ...panelStyle, bottom: 0, top: "50dvh" }}
         initial={{ y: 0 }}
         animate={{ y: isSplitting ? "100%" : 0 }}
         transition={{ duration: 1.1, ease: easeSplit }}
@@ -114,7 +114,12 @@ export default function PageIntro({ onComplete }) {
         <motion.img
           src="/Images/finallogo.png"
           alt="Aklan Tourism"
-          style={{ width: 200, height: "auto", position: "relative", filter: "drop-shadow(0 0 18px rgba(0, 0, 0, 0.45))" }}
+          style={{
+            width: "clamp(120px, 40vw, 200px)",
+            height: "auto",
+            position: "relative",
+            filter: "drop-shadow(0 0 18px rgba(0, 0, 0, 0.45))",
+          }}
           initial={{ opacity: 0, scale: 0.72, filter: "blur(12px) drop-shadow(0 0 18px rgba(0, 0, 0, 0.3))" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px) drop-shadow(0 0 18px rgba(0, 0, 0, 0.45))" }}
           transition={{ duration: 0.9, ease: easeOut, delay: 0.2 }}

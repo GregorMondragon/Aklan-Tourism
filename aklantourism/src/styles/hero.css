@@ -5,7 +5,7 @@
 ══════════════════════════════════ */
 .hero {
   font-family: 'Outfit', sans-serif;
-  height: 100svh; /* use svh for mobile browsers */
+  height: 100svh;
   min-height: 600px;
   position: relative;
   overflow: hidden;
@@ -31,10 +31,11 @@
   color: white;
   text-align: center;
   padding: 0 20px;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   z-index: 10;
-  margin-top: -40px; /* nudge above center to make room for bottom cards */
+  margin-top: -40px;
+  /* nudge above center to make room for bottom cards */
 }
 
 .hero-content h1 {
@@ -96,6 +97,24 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   z-index: 10;
+}
+
+/* Carousel wrapper — desktop: invisible passthrough; mobile: flex column */
+.hero-carousel-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Dot row — hidden on desktop */
+.hero-carousel-dots {
+  display: none;
 }
 
 .grid-card {
@@ -175,13 +194,27 @@
 }
 
 @keyframes scrollWheel {
-  0% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(10px); }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(60px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ══════════════════════════════════
@@ -215,6 +248,8 @@
 @media (max-width: 600px) {
   .hero {
     min-height: 100svh;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   /* Make background slightly darker on mobile so white text pops against bright videos */
@@ -225,7 +260,7 @@
   /* Revert to absolute positioning, perfectly centered but nudged up from cards */
   .hero-content {
     position: absolute;
-    top: 42%;
+    top: 60%;
     left: 0;
     transform: translateY(-50%);
     width: 100%;
@@ -235,6 +270,7 @@
     align-items: center;
     justify-content: center;
     min-height: auto;
+    box-sizing: border-box;
   }
 
   .hero-content h1 {
@@ -254,6 +290,7 @@
     /* Premium touch: Limit lines so it doesn't cover the whole screen */
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -268,10 +305,12 @@
   /* Premium Carousel — absolute at bottom, sleek glassmorphism */
   .hero-bottom-grid {
     position: absolute;
-    bottom: max(24px, env(safe-area-inset-bottom, 24px));
+    bottom: max(30px, env(safe-area-inset-bottom, 30px));
+    left: 0;
+    right: 0;
     width: 100%;
-    padding: 0 24px;
-    gap: 16px;
+    padding: 0 20px;
+    gap: 14px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -279,6 +318,7 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     touch-action: pan-x;
+    box-sizing: border-box;
   }
 
   .hero-bottom-grid::-webkit-scrollbar {
@@ -303,6 +343,7 @@
   .card-desc {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     font-size: 0.85rem;
@@ -310,6 +351,44 @@
 
   .scroll-indicator {
     display: none;
+  }
+
+  /* Carousel wrap — override absolute positioning to flex column */
+  .hero-carousel-wrap {
+    position: absolute;
+    bottom: max(0px, env(safe-area-inset-bottom, 0px));
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    padding-bottom: 11px;
+  }
+
+  /* Dots row */
+  .hero-carousel-dots {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* Individual dot */
+  .hero-dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transition: background 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  /* Active dot */
+  .hero-dot-active {
+    background: #ffffff;
+    transform: scale(1.5);
   }
 }
 
