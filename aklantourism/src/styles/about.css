@@ -276,10 +276,19 @@
 }
 
 /* ── Responsive adjustments ── */
+
+/* iOS fix: background-attachment:fixed breaks on mobile Safari */
 @media (max-width: 900px) {
+  .abt-hero {
+    background-attachment: scroll;
+  }
+
+  .abt-philosophy-bg {
+    background-attachment: scroll;
+  }
+
   .abt-timeline::after {
     left: 20px;
-    /* Move line to left edge */
   }
 
   .abt-timeline-item {
@@ -296,14 +305,58 @@
 
 @media (max-width: 600px) {
   .abt-hero {
-    height: 70vh;
+    height: 65vh;
+    min-height: 420px;
   }
 
   .abt-hero-content {
-    padding: 0 20px;
+    padding: 0 24px;
+  }
+
+  .abt-hero-content h1 {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+
+  .abt-hero-content p {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+
+  /* Reduce extreme section paddings for mobile */
+  .abt-timeline-section {
+    padding: 60px 24px 80px;
+  }
+
+  .abt-philosophy-section {
+    padding: 60px 24px;
+  }
+
+  .abt-reviews-section {
+    padding: 60px 20px;
+  }
+
+  .abt-section-header {
+    margin-bottom: 36px;
+    padding: 0 8px;
+  }
+
+  .abt-section-header h2 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+
+  .abt-card {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 32px 24px;
+  }
+
+  /* Prevents horizontal overflow on small phones */
+  .abt-review-card {
+    min-width: 100%;
+    padding: 24px;
   }
 
   .abt-timeline-item {
-    padding-left: 40px;
+    padding: 20px 0 20px 44px;
   }
 }

@@ -89,11 +89,11 @@ function Hero({ introComplete }) {
           { icon: "🧶", title: "Culture", desc: "Witness the delicate art of hand-woven Piña cloth in Kalibo and connect with the true soul of Aklanon artistry." }
         ].map((item, index) => (
           <motion.div key={index} className="grid-card" variants={cardUp}>
-            <div className="card-header" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <span className="card-icon" style={{ fontSize: "1.4rem" }}>{item.icon}</span>
-              <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: "600", color: "#ebebebff" }}>{item.title}</h3>
+            <div className="card-header">
+              <span className="card-icon">{item.icon}</span>
+              <h3>{item.title}</h3>
             </div>
-            <p style={{ marginTop: "12px", lineHeight: "1.5", fontSize: "0.9rem", color: "#e0e0e0", textShadow: "none" }}>{item.desc}</p>
+            <p className="card-desc">{item.desc}</p>
           </motion.div>
         ))}
       </motion.div>

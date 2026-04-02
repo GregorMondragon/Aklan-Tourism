@@ -144,11 +144,14 @@
   color: #0b1f45;
 }
 
-.descriptionfes {
+/* Fix: JSX uses className="description", CSS named this .descriptionfes */
+.descriptionfes,
+.description {
   font-size: clamp(0.88rem, 1.8vw, 1.05rem);
   line-height: 1.7;
   color: #4a6a9e;
-  margin-bottom: clamp(24px, 4vw, 50px);
+  margin-bottom: 15px;
+  /* fixed tighter gap for desktop */
   max-width: 450px;
 }
 
@@ -211,32 +214,68 @@
 /* Mobile */
 @media (max-width: 600px) {
   .festival-container {
-    padding: 40px 16px 36px;
+    padding: 48px 20px 48px;
   }
 
   .grid-layout {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 28px;
   }
 
-  /* Show only the left column images on mobile to keep it clean */
+  /* Show 2 images side-by-side instead of hiding middle column */
+  .left-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .left-column .image-wrapper.large,
+  .left-column .image-wrapper.small-wide {
+    height: 180px;
+  }
+
+  /* Hide middle column on mobile — left pair is enough */
   .middle-column {
     display: none;
   }
 
-  .large {
-    height: 240px;
-  }
-
-  .small-wide {
-    height: 150px;
-  }
-
+  /* Separator line between image block and text */
   .content-column {
-    padding-top: 0;
+    border-top: 1px solid rgba(11, 31, 69, 0.12);
+    padding-top: 24px;
+    padding-left: 0;
   }
 
-  .descriptionfes {
+  .title {
+    font-size: clamp(1.5rem, 5vw, 1.9rem);
+    margin-bottom: 12px;
+  }
+
+  .title2 {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    margin-bottom: 6px;
+  }
+
+  .descriptionfes,
+  .description {
     max-width: 100%;
+    font-size: 0.92rem;
+    margin-bottom: 20px;
+    /* fixed tighter gap for mobile */
+  }
+
+  /* Full-width button on mobile */
+  .learn-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    min-height: 52px;
+    font-size: 0.9rem;
+  }
+
+  .learn-btn:active {
+    transform: scale(0.97);
+    background: #0b1f45;
+    color: #fff;
   }
 }

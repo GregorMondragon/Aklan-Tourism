@@ -86,16 +86,42 @@
 
 @media (max-width: 600px) {
   .why {
-    padding: 32px 16px 48px;
+    padding: 48px 20px 60px;
+  }
+
+  .why h2 {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin-bottom: 8px;
+  }
+
+  .intro {
+    margin-bottom: 32px;
+  }
+
+  .cardWhy {
+    border-radius: 18px;
+    transition: box-shadow 0.4s ease, transform 0.2s ease;
+  }
+
+  /* Tap feedback on mobile */
+  .cardWhy:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  }
+
+  .cardWhy p {
+    padding: 16px 20px 24px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .cardWhy img {
+    height: 240px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    gap: 18px;
-    padding-top: 16px;
-  }
-
-  .cardWhy img {
-    height: 220px;
+    gap: 20px;
+    padding-top: 20px;
   }
 }

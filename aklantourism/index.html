@@ -135,6 +135,41 @@
       html {
         scroll-behavior: smooth;
       }
+
+      /* ── Global Mobile Optimizations ── */
+
+      /* Better tap highlight — subtle but non-jarring */
+      * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Prevent text size adjustment on iOS rotation */
+      body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      /* Prevent images from overflowing their containers */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Remove 300ms tap delay on interactive elements */
+      button,
+      [role="button"],
+      [tabindex],
+      a {
+        touch-action: manipulation;
+      }
+
+      /* WCAG 2.5.5 — minimum tap target for interactive elements */
+      button,
+      [role="button"],
+      input[type="button"],
+      input[type="submit"] {
+        min-height: 44px;
+      }
     </style>
   </head>
   <body>

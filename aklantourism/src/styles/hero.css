@@ -126,7 +126,7 @@
 }
 
 .card-icon {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   opacity: 0.9;
 }
 
@@ -134,14 +134,17 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ebebeb;
 }
 
-.grid-card p {
-  font-size: 0.82rem;
-  line-height: 1.6;
-  opacity: 0.65;
-  margin: 0;
+.card-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  margin: 12px 0 0 0;
+  color: #e0e0e0;
 }
 
 /* ── Scroll Indicator ─────────── */
@@ -208,59 +211,101 @@
   }
 }
 
-/* Mobile: 600px */
+/* Mobile: Premium Layout (max-width: 600px) */
 @media (max-width: 600px) {
   .hero {
     min-height: 100svh;
   }
 
+  /* Make background slightly darker on mobile so white text pops against bright videos */
+  .overlay {
+    background: linear-gradient(to bottom, rgba(3, 8, 46, 0.35) 0%, rgba(3, 8, 46, 0.75) 100%);
+  }
+
+  /* Revert to absolute positioning, perfectly centered but nudged up from cards */
   .hero-content {
-    top: 38%;
+    position: absolute;
+    top: 42%;
+    left: 0;
     transform: translateY(-50%);
-    margin-top: 0;
-    padding: 0 16px;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
   }
 
   .hero-content h1 {
-    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    font-size: clamp(2rem, 9vw, 2.8rem);
     letter-spacing: 0.5px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   }
 
   .hero-content p {
-    font-size: 0.88rem;
-    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    /* Premium touch: Limit lines so it doesn't cover the whole screen */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .start-btn {
-    padding: 12px 24px;
-    font-size: 0.8rem;
+    padding: 14px 32px;
+    font-size: 0.9rem;
+    min-width: unset;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
-  /* Show cards as a horizontal swipeable carousel */
+  /* Premium Carousel — absolute at bottom, sleek glassmorphism */
   .hero-bottom-grid {
+    position: absolute;
+    bottom: max(24px, env(safe-area-inset-bottom, 24px));
+    width: 100%;
+    padding: 0 24px;
+    gap: 16px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    padding: 0 16px;
-    gap: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x;
   }
 
   .hero-bottom-grid::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
   }
 
+  /* Sleek floating glass cards instead of flat bottom blocks */
   .grid-card {
-    flex: 0 0 82%;
+    flex: 0 0 calc(100vw - 72px);
     scroll-snap-align: center;
-    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   }
 
   .grid-card:last-child {
-    border-right: none !important;
-    margin-right: 16px; /* spacing after last item */
+    margin-right: 24px;
+  }
+
+  .card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.85rem;
   }
 
   .scroll-indicator {
@@ -272,5 +317,9 @@
 @media (max-width: 380px) {
   .hero-content h1 {
     font-size: 1.4rem;
+  }
+
+  .grid-card {
+    flex: 0 0 88%;
   }
 }

@@ -334,10 +334,11 @@ function Navbar({ introComplete = true }) {
           <motion.div
             id="mobile-menu"
             className="mobile-menu"
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.28, ease: easeOut }}
+            initial={{ opacity: 0, scale: 0.85, filter: "blur(10px)", y: -10 }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, filter: "blur(10px)", y: -10 }}
+            transition={{ type: "spring", stiffness: 400, damping: 35 }}
+            style={{ transformOrigin: "top right" }}
             role="navigation"
             aria-label="Mobile navigation"
           >

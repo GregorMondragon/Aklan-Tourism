@@ -37,6 +37,7 @@
   text-align: center;
   margin-bottom: 28px;
   letter-spacing: -0.5px;
+  padding: 0 20px;
 }
 
 .dest-hero-title span {
@@ -44,18 +45,34 @@
   color: #ffffff;
 }
 
-/* ─── Filter Tabs ─── */
 .dest-filters {
   position: relative;
   z-index: 2;
   display: flex;
-  gap: 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 11px;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
   border-radius: 50px;
-  padding: 7px 10px;
+  padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  max-width: 95vw;
+}
+
+.dest-filters::after {
+  content: '';
+  display: block;
+  flex: 0 0 16px;
+  min-width: 16px;
+}
+
+.dest-filters::-webkit-scrollbar {
+  display: none;
 }
 
 .dest-filter-btn {
@@ -64,7 +81,7 @@
   border: none;
   background: transparent;
   color: #1a2a4a;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.22s cubic-bezier(0.16, 1, 0.3, 1),
@@ -73,6 +90,8 @@
   font-family: inherit;
   position: relative;
   isolation: isolate;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .dest-filter-btn:hover {
@@ -457,7 +476,7 @@
 @media (max-width: 900px) {
   .dest-content {
     flex-direction: column;
-    padding: 24px 20px 48px;
+    padding: 24px 24px 60px;
   }
 
   .dest-sidebar {
@@ -465,11 +484,27 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
+    padding: 20px 20px;
     position: static;
+    align-items: flex-start;
+  }
+
+  .sidebar-logo-wrap {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  .sidebar-logo {
+    height: 48px;
+    width: auto;
   }
 
   .dest-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
   }
 
   .map-overlay {
@@ -482,12 +517,70 @@
 }
 
 @media (max-width: 600px) {
+
+  /* Scrollable filter tabs — prevent overflow and add breathing room */
+  .dest-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-radius: 20px;
+    padding: 8px;
+    gap: 1px;
+    width: 93vw;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .dest-filter-btn:last-child {
+    margin-right: 15px;
+  }
+
+  .dest-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dest-filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
   .dest-hero {
-    height: 260px;
+    height: 300px;
+  }
+
+  .dest-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: 20px;
+    padding: 0 24px;
+    line-height: 1.25;
+  }
+
+  .dest-content {
+    padding: 20px 16px 48px;
   }
 
   .dest-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .dest-card-body {
+    padding: 20px 20px 24px;
+  }
+
+  /* Reduce excessive map overlay top padding on mobile */
+  .map-overlay {
+    padding: clamp(80px, 15vh, 140px) 16px 20px;
+    align-items: flex-start;
+  }
+
+  .expanded-map-wrap {
+    width: 100%;
+    max-width: 100%;
   }
 }
 

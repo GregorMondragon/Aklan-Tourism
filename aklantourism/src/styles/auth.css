@@ -263,3 +263,29 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* ── Mobile fixes ── */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+
+  .auth-header h2 {
+    font-size: 24px;
+  }
+
+  /* Move back button clear of iPhone notch zone */
+  .back-home {
+    top: 20px;
+    left: 16px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* Safe-area support for notch phones */
+  .auth-container {
+    padding: clamp(20px, 5vh, 40px) 16px;
+    padding-top: max(60px, env(safe-area-inset-top, 60px));
+  }
+}

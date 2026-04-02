@@ -272,3 +272,65 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 600px) {
+  .cu-hero {
+    background-attachment: scroll; /* iOS fix */
+    height: 50vh;
+    min-height: 320px;
+  }
+
+  .cu-hero-content {
+    padding: 0 20px;
+  }
+
+  .cu-content {
+    margin: -30px auto 0; /* reduce negative margin to prevent overlap */
+    padding: 0 16px;
+    gap: 48px;
+  }
+
+  .cu-profile {
+    padding: 32px 20px;
+    gap: 24px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .cu-profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .cu-profile-info h3 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .cu-roles {
+    justify-content: center;
+  }
+
+  .cu-form-card {
+    padding: 28px 20px;
+  }
+
+  .cu-form-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .cu-grid {
+    gap: 28px;
+  }
+
+  .cu-info-card {
+    padding: 20px 16px;
+  }
+
+  /* Safe-area bottom padding for notch phones */
+  .contact-wrapper {
+    padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+  }
+}

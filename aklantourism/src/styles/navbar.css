@@ -347,55 +347,62 @@
 }
 
 /* ══════════════════════════════════════════════
-   MOBILE MENU DRAWER
+   PREMIUM MOBILE FLOATING MENU
 ══════════════════════════════════════════════ */
 .mobile-menu {
-  width: 100%;
-  background: rgba(9, 14, 38, 0.98);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  /* no fixed height — let it be content-driven */
+  position: absolute;
+  top: calc(100% + 4px);
+  right: clamp(16px, 5vw, 70px);
+  width: 240px;
+  background: rgba(12, 18, 44, 0.92);
+  backdrop-filter: blur(34px) saturate(180%);
+  -webkit-backdrop-filter: blur(34px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+  overflow: hidden;
+  z-index: 1200;
 }
 
 .mobile-menu ul {
   list-style: none;
   margin: 0;
-  padding: 8px 0 12px;
+  padding: 10px 8px; /* space around items */
   display: flex;
   flex-direction: column;
 }
 
 .mobile-nav-item {
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
-  font-size: 1rem;
-  padding: 14px clamp(16px, 5vw, 28px);
+  font-size: 0.98rem;
+  padding: 14px 20px;
+  margin: 2px;
   cursor: pointer;
-  border-left: 3px solid transparent;
-  transition: all 0.2s ease;
-  letter-spacing: 0.2px;
-  min-height: 52px;
+  border-radius: 14px; /* inner pill shape */
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.4px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   user-select: none;
 }
 
 .mobile-nav-item:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  border-left-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
 }
 
 .mobile-nav-item.active {
   color: #fff;
-  background: rgba(100, 160, 255, 0.1);
-  border-left-color: #64a0ff;
+  background: rgba(255, 255, 255, 0.15);
   font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-nav-item:focus-visible {
-  outline: 2px solid rgba(100, 160, 255, 0.7);
+  outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: -2px;
 }
 
@@ -515,6 +522,28 @@
   .nav-container {
     padding: 6px 16px;
     min-height: 58px;
+  }
+
+  .nav-right-section {
+    gap: 12px;
+  }
+
+  .nav-actions-wrapper {
+    gap: 10px;
+  }
+
+  /* Limit search width so it never bleeds into the logo */
+  .search-bar-container {
+    max-width: calc(100vw - 160px);
+  }
+
+  /* Keep mobile floating menu anchored to the tighter right margin */
+  .mobile-menu {
+    right: 16px;
+  }
+  
+  .mobile-nav-item {
+    min-height: 52px; /* Ensure highly tappable on small phones */
   }
 }
 
