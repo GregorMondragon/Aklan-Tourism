@@ -1,4 +1,5 @@
 .festival-container {
+  position: relative;
   background-color: #eef2f7;
   padding: clamp(40px, 6vw, 80px) clamp(16px, 4vw, 70px) clamp(32px, 5vw, 40px);
   color: #0b1f45;
@@ -7,6 +8,7 @@
   align-items: center;
   /* Remove fixed height — let content drive it */
   min-height: 0;
+  overflow: hidden;
 }
 
 .grid-layout {
