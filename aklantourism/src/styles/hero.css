@@ -93,7 +93,7 @@
   left: 0;
   right: 0;
   padding: 0 60px;
-  gap: 15px;
+  gap: 30px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   z-index: 10;
@@ -129,12 +129,12 @@
   transition: background 0.4s ease;
 }
 
-.grid-card:last-child {
+.hero-card-wrapper:last-child .grid-card {
   border-right: none;
 }
 
 .grid-card:hover {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.801);
 }
 
 .card-header {
@@ -238,8 +238,8 @@
     padding: 16px 20px;
   }
 
-  .grid-card:nth-child(2),
-  .grid-card:nth-child(4) {
+  .hero-card-wrapper:nth-child(2) .grid-card,
+  .hero-card-wrapper:nth-child(4) .grid-card {
     border-right: none;
   }
 }
@@ -260,7 +260,7 @@
   /* Revert to absolute positioning, perfectly centered but nudged up from cards */
   .hero-content {
     position: absolute;
-    top: 60%;
+    top: 45%;
     left: 0;
     transform: translateY(-50%);
     width: 100%;
@@ -325,19 +325,22 @@
     display: none;
   }
 
-  /* Sleek floating glass cards instead of flat bottom blocks */
-  .grid-card {
+  .hero-card-wrapper {
     flex: 0 0 calc(100vw - 72px);
     scroll-snap-align: center;
+  }
+
+  .hero-card-wrapper:last-child {
+    margin-right: 24px;
+  }
+
+  /* Sleek floating glass cards instead of flat bottom blocks */
+  .grid-card {
     border-radius: 20px;
     padding: 20px 24px;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  }
-
-  .grid-card:last-child {
-    margin-right: 24px;
   }
 
   .card-desc {
@@ -398,7 +401,7 @@
     font-size: 1.4rem;
   }
 
-  .grid-card {
+  .hero-card-wrapper {
     flex: 0 0 88%;
   }
 }

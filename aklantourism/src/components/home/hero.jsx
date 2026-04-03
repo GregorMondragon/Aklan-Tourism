@@ -1,9 +1,78 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useCallback } from "react";
 import "../../styles/hero.css";
 
 const easeOut = [0.16, 1, 0.3, 1];
+
+// 3D Tilt Card Component optimized for Hero Cards
+function TiltCard({ children, variants, className, wrapperClass }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 200, damping: 25 });
+  const mouseYSpring = useSpring(y, { stiffness: 200, damping: 25 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+
+  const handleMouseMove = (e) => {
+    // Only apply tilt on desktop to optimize performance and prevent touch issues
+    if (window.innerWidth <= 768) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      className={wrapperClass}
+      style={{ perspective: 1200, display: "flex", flexDirection: "column", height: "100%", flexShrink: 0 }}
+      variants={variants}
+    >
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          cursor: "pointer",
+          willChange: "transform"
+        }}
+        whileHover={{
+            scale: 1.05,
+            transition: { duration: 0.4, ease: "easeOut" }
+        }}
+        whileTap={{
+            scale: 0.98,
+            transition: { duration: 0.2 }
+        }}
+        className="tilt-container"
+      >
+        <div style={{ transform: "translateZ(30px)", height: "100%", display: "flex", flexDirection: "column", willChange: "transform" }} className={className}>
+            {children}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 function Hero({ introComplete }) {
   const navigate = useNavigate();
@@ -55,11 +124,11 @@ function Hero({ introComplete }) {
 
   return (
     <section className="hero">
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
         className="video-bg"
         poster="/Images/aklantourismpictures/Boracay%20White%20Beach/Boracay1.jpg"
         aria-hidden="true"
@@ -78,7 +147,7 @@ function Hero({ introComplete }) {
         </motion.h1>
 
         <motion.p variants={fadeLeft}>
-          Step into Aklan—the Philippines' oldest province and the heart of Western Visayas. From our rhythmic traditions to our world-class shores, we invite you to explore the heritage, serenity, and spirit of our home. Discover the wonder that stays with you.
+          Beyond the world-famous shores lies a province of untold beauty. Experience the ultimate blend of island life, festive energy, and pristine nature. Your Aklan adventure begins now.
         </motion.p>
 
         <motion.button
@@ -105,13 +174,13 @@ function Hero({ introComplete }) {
           onScroll={handleScroll}
         >
           {cards.map((item, index) => (
-            <motion.div key={index} className="grid-card" variants={cardUp}>
+             <TiltCard key={index} variants={cardUp} wrapperClass="hero-card-wrapper" className="grid-card">
               <div className="card-header">
                 <span className="card-icon">{item.icon}</span>
                 <h3>{item.title}</h3>
               </div>
               <p className="card-desc">{item.desc}</p>
-            </motion.div>
+            </TiltCard>
           ))}
         </motion.div>
 

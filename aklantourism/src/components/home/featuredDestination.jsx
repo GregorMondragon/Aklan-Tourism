@@ -33,7 +33,7 @@ const destinations = [
       { icon: "⛵", label: "Sunset Sailing" },
       { icon: "🤿", label: "Watersports" },
     ],
-    image: "/Images/aklantourismpictures/Boracay%20White%20Beach/Boracay1.jpg",
+    image: "/Images/aklantourismpictures/Boracay%20White%20Beach/boracay6.webp",
   },
   {
     id: 8,
@@ -48,7 +48,7 @@ const destinations = [
       { icon: "🦅", label: "Rich Birdlife" },
       { icon: "🌿", label: "Mangrove Forest" },
     ],
-    image: "/Images/aklantourismpictures/BakhawanEcoPark/bakhawan1.jpg",
+    image: "/Images/aklantourismpictures/BakhawanEcoPark/bakhawan3.jpg",
   },
   {
     id: 16,
@@ -123,13 +123,27 @@ const FeaturedDestination = () => {
     }
   };
 
-  // Scroll variants for the first-time appearance
+  // Scroll variants for synchronized premium stagger
   const scrollReveal = {
-    hidden: { opacity: 0 },
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    }
+  };
+
+  const itemReveal = {
+    hidden: { opacity: 0, y: 40, filter: "blur(8px)" },
     visible: {
       opacity: 1,
-      transition: { duration: 1, staggerChildren: 0.2 }
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 2, ease: easeOut }
     }
+  };
+
+  const bgReveal = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1.2 } }
   };
 
   return (
@@ -140,53 +154,58 @@ const FeaturedDestination = () => {
       viewport={{ once: false, amount: 0.2 }}
       variants={scrollReveal}
     >
-      {/* ── Animated Background ── */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`bg-${activeIndex}`}
-          className="featured-bg"
-          style={{ backgroundImage: `url(${active.image})` }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        />
-      </AnimatePresence>
+      {/* ── Animated Background Wrapper ── */}
+      <motion.div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }} variants={bgReveal}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`bg-${activeIndex}`}
+            className="featured-bg"
+            style={{ backgroundImage: `url(${active.image})` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
+      </motion.div>
 
       {/* ── Gradient Overlay ── */}
       <div className="featured-overlay" />
 
       {/* ═══ TOP LABEL ═══ */}
-      <div className="featured-label-row">
+      <motion.div
+        className="featured-label-row"
+        variants={itemReveal}
+      >
         <motion.span
           className="featured-label-line"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
           style={{ originX: 0 }}
         />
-        <motion.span
-          className="featured-label-text"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
+        <motion.span className="featured-label-text">
           TOP DESTINATIONS
         </motion.span>
         <motion.span
           className="featured-label-line"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
           style={{ originX: 1 }}
         />
-      </div>
+      </motion.div>
 
       {/* ═══ MAIN LAYOUT ═══ */}
       <div className="featured-container">
 
         {/* ── LEFT: Text content ── */}
-        <div className="featured-content">
+        <motion.div
+          className="featured-content"
+          variants={itemReveal}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={`content-${activeIndex}`}
@@ -239,15 +258,8 @@ const FeaturedDestination = () => {
 
           {/* ── CTA Button ── */}
           <motion.button
-            key={`btn-${activeIndex}`}
             className="feat-cta-btn"
-            initial={{ opacity: 0, y: 15, scale: 0.95 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              transition: { delay: 0.5, type: "spring", stiffness: 260, damping: 20 }
-            }}
+            variants={itemReveal}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() =>
@@ -256,10 +268,13 @@ const FeaturedDestination = () => {
           >
             View Destination
           </motion.button>
-        </div>
+        </motion.div>
 
         {/* ── RIGHT: Cards + Navigation ── */}
-        <div className="featured-right">
+        <motion.div
+          className="featured-right"
+          variants={itemReveal}
+        >
 
           {/* Card stack */}
           <div className="card-stack">
@@ -319,7 +334,7 @@ const FeaturedDestination = () => {
             </button>
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

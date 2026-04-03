@@ -58,11 +58,11 @@
 
 .featured-label-text {
   font-family: "Ubuntu Condensed", "Ubuntu", sans-serif;
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgb(255, 255, 255);
   white-space: nowrap;
 }
 
@@ -379,7 +379,8 @@
 .feat-dot {
   width: 7px;
   height: 7px;
-  min-height: 7px; /* Override global 44px min-height for these specific dot buttons */
+  min-height: 7px;
+  /* Override global 44px min-height for these specific dot buttons */
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.28);
@@ -435,7 +436,8 @@
 
 @media (max-width: 640px) {
   .featured-label-row {
-    padding-top: 80px; /* clears 64px navbar height */
+    padding-top: 80px;
+    /* clears 64px navbar height */
     width: 94%;
   }
 

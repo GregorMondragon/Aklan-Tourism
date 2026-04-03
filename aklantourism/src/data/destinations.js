@@ -76,7 +76,7 @@ export const destinations = [
   {
     id: 12,
     name: "Pangihan Cave",
-    location: "Publacion, Malay",
+    location: "Poblacion, Malay",
     description: "A fascinating ancient cave system featuring dramatic stalactite and stalagmite formations inside eight chambers.",
     image: "/Images/aklantourismpictures/PangihanCave/pangihan1.jpg",
     category: "Nature",

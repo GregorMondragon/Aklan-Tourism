@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaPaperPlane } from "react-icons/fa";
+import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaPaperPlane, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import "../../styles/contactus.css";
 
 const easeOut = [0.16, 1, 0.3, 1];
 const scrollConfig = { once: false, amount: 0.1 };
+
+const socials = [
+  { Icon: FaFacebookF,  label: "Facebook",  href: "https://facebook.com/" },
+  { Icon: FaInstagram,  label: "Instagram", href: "https://instagram.com/" },
+  { Icon: FaTwitter,    label: "Twitter",   href: "https://twitter.com/" },
+  { Icon: FaYoutube,    label: "YouTube",   href: "https://youtube.com/" },
+];
 
 export default function ContactUs() {
     const [formStatus, setFormStatus] = useState(""); // "", "sending", "success", "error"
@@ -127,6 +134,26 @@ export default function ContactUs() {
                                 </div>
                             </motion.div>
                         ))}
+
+                        {/* Social Links */}
+                        <motion.div
+                            className="cu-info-card cu-socials-card"
+                            initial={{ opacity: 0, x: -40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={scrollConfig}
+                            transition={{ duration: 0.6, delay: 0.45, ease: easeOut }}
+                        >
+                            <div className="cu-socials-content">
+                                <h4>Follow Me on Social Media</h4>
+                                <div className="cu-social-icons">
+                                    {socials.map(({ Icon, label, href }) => (
+                                        <a key={label} href={href} aria-label={label} target="_blank" rel="noreferrer" className="cu-social-link">
+                                            <Icon />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
 
                     {/* Form Side */}

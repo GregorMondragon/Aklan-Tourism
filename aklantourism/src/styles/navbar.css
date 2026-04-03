@@ -20,25 +20,21 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px clamp(16px, 5vw, 70px);
-  background: rgba(101, 101, 101, 0.263);
-  /* Subtle dark tint adaptable for light/dark */
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  /* Solid fallback for browsers without backdrop-filter */
-  background-color: rgba(17, 36, 72, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(10, 20, 66, 0.349);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 64px;
 }
 
 .navbar.scrolled .nav-container {
-  background: rgba(10, 10, 15, 0.75);
-  /* Deeper glass tint on scroll */
-  backdrop-filter: blur(36px) saturate(180%);
-  -webkit-backdrop-filter: blur(36px) saturate(180%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(22, 35, 92, 0.178);
+  backdrop-filter: blur(36px) saturate(200%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.534);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* ── Logo ───────────────────────────────── */
