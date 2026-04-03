@@ -7,10 +7,10 @@ const easeOut = [0.16, 1, 0.3, 1];
 const scrollConfig = { once: false, amount: 0.1 };
 
 const socials = [
-  { Icon: FaFacebookF,  label: "Facebook",  href: "https://facebook.com/" },
-  { Icon: FaInstagram,  label: "Instagram", href: "https://instagram.com/" },
-  { Icon: FaTwitter,    label: "Twitter",   href: "https://twitter.com/" },
-  { Icon: FaYoutube,    label: "YouTube",   href: "https://youtube.com/" },
+    { Icon: FaFacebookF, label: "Facebook", href: "https://facebook.com/" },
+    { Icon: FaInstagram, label: "Instagram", href: "https://instagram.com/" },
+    { Icon: FaTwitter, label: "Twitter", href: "https://twitter.com/" },
+    { Icon: FaYoutube, label: "YouTube", href: "https://youtube.com/" },
 ];
 
 export default function ContactUs() {
@@ -89,7 +89,7 @@ export default function ContactUs() {
                             <span className="cu-role-tag">Platform Architect</span>
                         </div>
                         <p>
-                            I am <strong>Gregor Allen B. Mondragon</strong>, a dedicated 3rd-year student at the <strong>College of Computer Studies, Aklan State University – Kalibo Campus</strong>, currently pursuing a <strong>Bachelor of Science in Information Technology, majoring in Software Engineering</strong>. 
+                            I am <strong>Gregor Allen B. Mondragon</strong>, a dedicated 3rd-year student at the <strong>College of Computer Studies, Aklan State University – Kalibo Campus</strong>, currently pursuing a <strong>Bachelor of Science in Information Technology, majoring in Software Engineering</strong>.
                         </p>
                         <p>
                             As the sole developer and architect behind this platform, I have meticulously engineered every interaction—from the fluid animations and high-end UI design to the underlying software architecture. This project represents the intersection of my technical expertise and my deep-rooted passion for showcasing Aklan's unmatched beauty to the world through a premium, immersive digital experience.
@@ -144,7 +144,7 @@ export default function ContactUs() {
                             transition={{ duration: 0.6, delay: 0.45, ease: easeOut }}
                         >
                             <div className="cu-socials-content">
-                                <h4>Follow Me on Social Media</h4>
+                                <h4>Follow Wonders Of Aklan on Social Media</h4>
                                 <div className="cu-social-icons">
                                     {socials.map(({ Icon, label, href }) => (
                                         <a key={label} href={href} aria-label={label} target="_blank" rel="noreferrer" className="cu-social-link">
