@@ -255,7 +255,7 @@ function WhyVisit() {
           viewport={{ once: false, amount: 0.1 }}
         >
           {REASONS.map((r, i) => (
-            <TiltCard key={r.id} variants={cardVariants} customDelay={i * 0.2}>
+            <TiltCard key={r.id} variants={cardVariants} customDelay={1.5 + (i * 0.2)}>
               <div className="why-card">
                 <div className="wc-img-wrap">
                   <img src={r.image} alt={r.title} className="wc-img" loading="lazy" />

@@ -14,11 +14,13 @@ export default function PageIntro({ onComplete }) {
       return;
     }
 
-    const t1 = setTimeout(() => setPhase("splitting"), 1900);
+    const t1 = setTimeout(() => {
+      setPhase("splitting");
+      if (onComplete) onComplete();
+    }, 1900);
     const t2 = setTimeout(() => {
       setPhase("done");
       sessionStorage.setItem("aklanIntroPlayed", "true");
-      if (onComplete) onComplete();
     }, 3000);
     
     return () => {
