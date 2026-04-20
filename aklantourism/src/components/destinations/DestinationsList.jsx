@@ -64,6 +64,17 @@ export default function DestinationsList() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // ── Body Scroll Lock for Map ── 
+  useEffect(() => {
+    if (isMapExpanded) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [isMapExpanded]);
+
   const [weatherData, setWeatherData] = useState({
     boracay: { temp: 29, condition: "Sunny", icon: "☀️", loading: true },
     kalibo: { temp: 28, condition: "Partly Cloudy", icon: "⛅", loading: true }
@@ -339,6 +350,7 @@ export default function DestinationsList() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: easeOut }}
             onClick={() => setIsMapExpanded(false)}
+            data-lenis-prevent
           >
             <motion.div
               className="expanded-map-wrap"

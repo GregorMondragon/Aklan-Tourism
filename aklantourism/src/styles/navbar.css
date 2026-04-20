@@ -59,6 +59,18 @@
   filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.2));
 }
 
+.logo-text {
+  color: #fff;
+  font-family: var(--font-premium, serif);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 500;
+  margin-left: 12px;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+}
+
 /* ── Desktop Nav Links ──────────────────── */
 .nav-links {
   color: aliceblue;

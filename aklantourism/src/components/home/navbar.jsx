@@ -132,7 +132,11 @@ function Navbar({ introComplete = true }) {
     >
       <div className="nav-container">
         {/* Left — Logo */}
-        <div className="logo">
+        <div
+          className="logo"
+          onClick={() => { setLogoRotation(logoRotation + 360); navigate("/"); }}
+          style={{ cursor: "pointer" }}
+        >
           <motion.img
             src="/Images/finallogo1.png"
             alt="Aklan Tourism — Home"
@@ -143,9 +147,8 @@ function Navbar({ introComplete = true }) {
               rotate: { duration: 0.6, ease: "easeInOut" },
               scale: { duration: 0.2, ease: "easeOut" }
             }}
-            onClick={() => { setLogoRotation(logoRotation + 360); navigate("/"); }}
-            style={{ cursor: "pointer" }}
           />
+          <span className="logo-text">Wonders of Aklan</span>
         </div>
 
         {/* Center — Navigation Links (Desktop) */}

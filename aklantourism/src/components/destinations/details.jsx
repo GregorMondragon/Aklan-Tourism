@@ -447,6 +447,15 @@ export default function DestinationDetails({ destination, onBack, onSelectDestin
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, []);
 
+    // ── Body Scroll Lock ── 
+    useEffect(() => {
+        const originalStyle = window.getComputedStyle(document.body).overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = originalStyle;
+        };
+    }, []);
+
     const handleNearbyClick = (wName) => {
         if (!onSelectDestination) return;
         const found = destinations.find(d =>
@@ -509,6 +518,7 @@ export default function DestinationDetails({ destination, onBack, onSelectDestin
             animate="visible"
             exit="hidden"
             variants={containerVariants}
+            data-lenis-prevent
         >
             <div className="dtl-page">
                 {/* ── Header: Back Button & Title ── */}
