@@ -1,114 +1,169 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/festivalAklan.css";
 
 const AklanFestival = () => {
   const navigate = useNavigate();
+  const sectionRef = useRef(null);
 
-  // Animation variants for reusability
-  const fadeInRight = {
-    hidden: { opacity: 0, x: 100 }, // Started further right for more "travel"
+  // Scroll tracking for parallax depth
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax offsets for different columns to create depth
+  const yLeft = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const yMiddle = useTransform(scrollYProgress, [0, 1], [0, -220]); // Moves faster
+  const yContent = useTransform(scrollYProgress, [0, 1], [0, -60]);
+
+  // Premium cubic bezier
+  const premiumEase = [0.16, 1, 0.3, 1];
+
+  // Clean fade-up reveal for images
+  const imageReveal = {
+    hidden: { 
+      y: 60,
+      scale: 1.1,
+      opacity: 0 
+    },
     visible: {
+      y: 0,
+      scale: 1,
       opacity: 1,
-      x: 0,
-      transition: { duration: 2, ease: [0.16, 1, 0.3, 1] } // Custom cubic-bezier for premium feel
+      transition: { duration: 2, ease: premiumEase }
     }
   };
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 80, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 1, ease: "easeOut" }
+  // 3D-tilt masked reveal for main title
+  const textReveal = {
+    hidden: { y: 80, opacity: 0, rotateX: "20deg" },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      rotateX: "0deg",
+      transition: { duration: 2, ease: premiumEase }
+    }
+  };
+
+  const slideLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: { 
+      x: 0, 
+      opacity: 1, 
+      transition: { duration: 2, ease: premiumEase } 
+    }
+  };
+
+  const slideRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: { 
+      x: 0, 
+      opacity: 1, 
+      transition: { duration: 2, ease: premiumEase } 
     }
   };
 
   const staggerContainer = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
-        staggerChildren: 0.15
+        staggerChildren: 0.25,
+        delayChildren: 0.1
       }
     }
   };
-  const scrollPopUp = {
-    offscreen: { opacity: 0, scale: 0.8, y: 100 },
-    onscreen: {
-      opacity: 1,
-      scale: 1,
-      y: 30,
-      transition: { type: "spring", bounce: 0.2, duration: 2 }
+
+  const contentStagger = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
     }
   };
+
   return (
-    <section className="festival-container">
+    <section className="festival-container" ref={sectionRef}>
       <motion.div
         className="grid-layout"
         initial="hidden"
         whileInView="visible"
-        // STICKY SCROLL SETTINGS
-        viewport={{ once: false, amount: 0.2 }}
+        viewport={{ once: false, amount: 0.1 }}
         variants={staggerContainer}
       >
 
-        {/* Left Column */}
-        <div className="left-column">
-          <motion.div className="image-wrapper large" variants={fadeInUp}>
-            <img src="/Images/ati01.jpg" alt="Colorful painted dancers at the Ati-Atihan Festival parade in Kalibo" loading="lazy" />
+        {/* Left Column — Subtle Parallax */}
+        <motion.div className="left-column" style={{ y: yLeft }}>
+          <motion.div className="image-wrapper large" variants={imageReveal}>
+            <img src="/Images/ati01.jpg" alt="Ati-Atihan Dancers" loading="lazy" />
           </motion.div>
-          <motion.div className="image-wrapper small-wide" variants={fadeInUp}>
-            <img src="/Images/ati02.jpg" alt="Ati-Atihan Festival street celebration with tribal costumes" loading="lazy" />
+          <motion.div className="image-wrapper small-wide" variants={imageReveal}>
+            <img src="/Images/ati02.jpg" alt="Ati-Atihan Celebration" loading="lazy" />
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Middle Column */}
-        <div className="middle-column">
-          <motion.div className="image-wrapper medium" variants={fadeInUp}>
-            <img src="/Images/vibrantkalibo.jpg" alt="Vibrant Kalibo street celebrations during Ati-Atihan Festival" loading="lazy" />
+        {/* Middle Column — Strong Parallax (Floating) */}
+        <motion.div className="middle-column" style={{ y: yMiddle }}>
+          <motion.div className="image-wrapper medium" variants={imageReveal}>
+            <img src="/Images/vibrantkalibo.jpg" alt="Vibrant Kalibo" loading="lazy" />
           </motion.div>
-          <motion.div className="image-wrapper medium-tall" variants={fadeInUp}>
-            <img src="/Images/ati03.jpg" alt="Tribal dancers in body paint performing at Ati-Atihan Festival" loading="lazy" />
+          <motion.div className="image-wrapper medium-tall" variants={imageReveal}>
+            <img src="/Images/ati03.jpg" alt="Tribal Dancers" loading="lazy" />
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Right Column */}
-        <div className="content-column">
-          <motion.h2 className="title" variants={fadeInRight}>Experience the Mother of All Philippine Festivals!</motion.h2>
+        {/* Right Column — Immersive Content Reveal */}
+        <motion.div 
+          className="content-column" 
+          style={{ y: yContent }}
+          variants={contentStagger}
+        >
+          <div style={{ overflow: 'hidden', perspective: '1000px' }}>
+            <motion.h2 className="title" variants={textReveal}>
+              Experience the Mother of All Philippine Festivals!
+            </motion.h2>
+          </div>
 
           <motion.div
             className="underline"
-            initial={{ width: 0 }}
-            whileInView={{ width: 120 }}
-            // Sync with the scroll repeat
-            viewport={{ once: false }}
-            transition={{ delay: 0.4, duration: 1.2 }}
+            variants={{
+              hidden: { scaleX: 0 },
+              visible: { scaleX: 1, transition: { duration: 1.5, ease: premiumEase } }
+            }}
+            style={{ originX: 0 }}
           />
-          <motion.div variants={fadeInRight}>
-            <h3 className="title2">Ati-atihan Festival</h3>
 
-            <p className="description">
+          <div style={{ overflow: 'hidden', perspective: '1000px' }}>
+            <motion.h3 className="title2" variants={slideLeft}>
+              Ati-atihan Festival
+            </motion.h3>
+          </div>
+
+          <div style={{ overflow: 'hidden', perspective: '1000px' }}>
+            <motion.p className="description" variants={slideRight}>
               From the rhythmic thumping of drums to the soot-covered dancers
               shouting "Hala Bira!", the Ati-Atihan Festival is a wild,
               soul-stirring celebration of faith and heritage.
-            </p>
-          </motion.div>
+            </motion.p>
+          </div>
+
           <motion.button
             className="learn-btn"
-            variants={scrollPopUp}
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: false, amount: 0.1 }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            variants={textReveal}
+            whileHover={{ 
+              scale: 1.06, 
+              backgroundColor: "#eeb437",
+              boxShadow: "0 10px 30px rgba(255, 187, 52, 0.4)" 
+            }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/destinations', { state: { selectedDestId: 16 } })}
           >
             Join the Celebration
           </motion.button>
-        </div>
+        </motion.div>
 
       </motion.div>
     </section>

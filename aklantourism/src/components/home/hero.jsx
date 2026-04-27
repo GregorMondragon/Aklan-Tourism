@@ -142,7 +142,7 @@ export default function Hero({ introComplete }) {
       {/* ── PHASE 1: Welcome ───────────────────────────────── */}
       <div ref={welcomeRef} className="hero-welcome">
         <p className="hero-welcome-sub">Philippines · Aklan</p>
-        <h1 className="hero-welcome-title">Welcome<br />in Aklan</h1>
+        <h1 className="hero-welcome-title">Welcome<br />to Aklan</h1>
         <div className="hero-welcome-bar" />
         <p className="hero-welcome-hint">↓ Scroll to explore</p>
       </div>

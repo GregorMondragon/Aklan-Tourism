@@ -308,7 +308,7 @@ export default function DestinationsList() {
                 whileTap={{ scale: 0.98, transition: { duration: 0.12 } }}
               >
                 <div className="dest-card-img-wrap">
-                <img src={dest.image} alt={`${dest.name} in ${dest.location}`} className="dest-card-img" loading="lazy" />
+                  <img src={dest.image} alt={`${dest.name} in ${dest.location}`} className="dest-card-img" loading="lazy" />
                   <motion.span
                     className="dest-card-tag"
                     initial={{ opacity: 0, scale: 0.8 }}

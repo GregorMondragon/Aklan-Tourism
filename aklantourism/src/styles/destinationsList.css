@@ -30,10 +30,10 @@
 .dest-hero-title {
   position: relative;
   z-index: 2;
-  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
   font-weight: 700;
-  color: #ffffff;
-  text-shadow: 0 2px 18px rgba(255, 255, 255, 0.5);
+  color: #f5f2ec;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
   text-align: center;
   margin-bottom: 28px;
   letter-spacing: -0.5px;
@@ -41,8 +41,18 @@
 }
 
 .dest-hero-title span {
-  font-weight: 300;
-  color: #ffffff;
+  font-family: 'Cormorant Garamond', serif !important;
+
+  font-weight: 700;
+  background: linear-gradient(118deg,
+      #f5f2ec 0%,
+      #e2d0a2 30%,
+      #ffbb34 62%,
+      #f5f2ec 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
 }
 
 .dest-filters {
@@ -323,10 +333,10 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(255, 255, 255, 0.90);
+  background: rgb(255, 255, 255);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #0b1f45;
+  color: #ffbb34;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.8px;

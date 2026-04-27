@@ -316,7 +316,8 @@
 
 @media (max-width: 600px) {
   .cu-hero {
-    background-attachment: scroll; /* iOS fix */
+    background-attachment: scroll;
+    /* iOS fix */
     height: 50vh;
     min-height: 320px;
   }
@@ -326,7 +327,8 @@
   }
 
   .cu-content {
-    margin: -30px auto 0; /* reduce negative margin to prevent overlap */
+    margin: -30px auto 0;
+    /* reduce negative margin to prevent overlap */
     padding: 0 16px;
     gap: 48px;
   }

@@ -1,7 +1,7 @@
 .festival-container {
   position: relative;
   background-color: #eef2f7;
-  padding: clamp(40px, 6vw, 80px) clamp(16px, 4vw, 70px) clamp(32px, 5vw, 40px);
+  padding: clamp(120px, 12vw, 180px) clamp(16px, 4vw, 70px) clamp(60px, 8vw, 100px);
   color: #0b1f45;
   display: flex;
   justify-content: center;
@@ -40,12 +40,18 @@
 /* Image sizes — use clamp for fluid scaling */
 .large {
   height: clamp(200px, 28vw, 450px);
-  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  --_m: conic-gradient(#000 0 0) no-repeat;
+  --_s: 45% 45%;
   mask:
-    left var(--_i, ) top var(--_g),
-    bottom var(--_i, ) left var(--_g),
-    top var(--_i, ) right var(--_g),
-    right var(--_i, ) bottom var(--_g);
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+  -webkit-mask:
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
   transition: .3s linear;
   cursor: pointer;
@@ -59,12 +65,18 @@
 
 .small-wide {
   height: clamp(110px, 14vw, 200px);
-  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  --_m: conic-gradient(#000 0 0) no-repeat;
+  --_s: 45% 45%;
   mask:
-    left var(--_i, ) top var(--_g),
-    bottom var(--_i, ) left var(--_g),
-    top var(--_i, ) right var(--_g),
-    right var(--_i, ) bottom var(--_g);
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+  -webkit-mask:
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
   transition: .3s linear;
   cursor: pointer;
@@ -78,12 +90,18 @@
 
 .medium {
   height: clamp(160px, 22vw, 350px);
-  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  --_m: conic-gradient(#000 0 0) no-repeat;
+  --_s: 45% 45%;
   mask:
-    left var(--_i, ) top var(--_g),
-    bottom var(--_i, ) left var(--_g),
-    top var(--_i, ) right var(--_g),
-    right var(--_i, ) bottom var(--_g);
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+  -webkit-mask:
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
   transition: .3s linear;
   cursor: pointer;
@@ -97,12 +115,18 @@
 
 .medium-tall {
   height: clamp(180px, 25vw, 400px);
-  --_g: 10%/45% 45% no-repeat conic-gradient(#000 0 0);
+  --_m: conic-gradient(#000 0 0) no-repeat;
+  --_s: 45% 45%;
   mask:
-    left var(--_i, ) top var(--_g),
-    bottom var(--_i, ) left var(--_g),
-    top var(--_i, ) right var(--_g),
-    right var(--_i, ) bottom var(--_g);
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+  -webkit-mask:
+    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
+    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
+    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
   transition: .3s linear;
   cursor: pointer;
@@ -123,54 +147,60 @@
 }
 
 .title {
-  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 15px;
+  font-family: 'Italiana', serif !important;
+  font-size: clamp(2.4rem, 5vw, 4.2rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.1;
+  margin-bottom: 20px;
   color: #0b1f45;
+  letter-spacing: -0.01em;
 }
 
 .underline {
-  width: 120px;
-  height: 3px;
-  margin-top: 20px;
-  background-color: #0b1f45;
-  margin-bottom: 32px;
+  width: 80px;
+  height: 2px;
+  margin-top: 10px;
+  background-color: #ffbb34;
+  /* Match site gold */
+  margin-bottom: 40px;
 }
 
 .title2 {
-  font-size: clamp(1.3rem, 2.8vw, 2rem);
-  font-weight: 500;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
   line-height: 1.2;
-  margin-bottom: 2px;
+  margin-bottom: 12px;
   color: #0b1f45;
 }
 
-/* Fix: JSX uses className="description", CSS named this .descriptionfes */
-.descriptionfes,
 .description {
-  font-size: clamp(0.88rem, 1.8vw, 1.05rem);
-  line-height: 1.7;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.8;
   color: #4a6a9e;
-  margin-bottom: 15px;
-  /* fixed tighter gap for desktop */
-  max-width: 450px;
+  margin-bottom: 24px;
+  max-width: 480px;
+  letter-spacing: 0.01em;
 }
 
 .learn-btn {
-  background: rgba(11, 31, 69, 0.05);
-  color: #0b1f45;
-  border: 1.5px solid rgba(11, 31, 69, 0.3);
-  padding: 13px 32px;
-  font-size: 0.85rem;
-  font-family: "Ubuntu Condensed", "Ubuntu", sans-serif;
+  background: #ffbb34;
+  color: #080c14;
+  border: none;
+  padding: 16px 40px;
+  font-size: 0.8rem;
+  font-family: "DM Sans", sans-serif !important;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  border-radius: 8px;
+  border-radius: 100px;
+  /* Pill shape like FeaturedDestination */
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  box-shadow: 0 4px 20px rgba(255, 187, 52, 0.25);
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
   will-change: transform;
   width: fit-content;
   min-height: 48px;
@@ -216,7 +246,7 @@
 /* Mobile */
 @media (max-width: 600px) {
   .festival-container {
-    padding: 48px 20px 48px;
+    padding: 100px 20px 48px;
   }
 
   .grid-layout {

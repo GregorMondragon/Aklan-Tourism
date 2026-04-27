@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  --wgold: #c8a45a;
+  --wgold: #ffbb34;
   --wgold-dim: rgba(200, 164, 90, 0.12);
   --wbg: #faf8f4;
   /* warm off-white */
@@ -73,9 +73,9 @@
 
 .why-eyebrow {
   font-family: 'DM Sans', sans-serif !important;
-  font-size: 0.64rem;
-  font-weight: 500;
-  letter-spacing: 0.30em;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.35em !important;
   text-transform: uppercase;
   color: var(--wgold);
   margin: 0 0 14px;

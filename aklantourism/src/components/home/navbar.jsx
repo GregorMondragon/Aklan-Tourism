@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../../styles/navbar.css";
-import { FaSearch, FaUser, FaTimes, FaBars } from "react-icons/fa";
+import { LuSearch, LuUser, LuX, LuMenu } from "react-icons/lu";
 import { useNavigate, useLocation } from "react-router-dom";
 import { destinations } from "../../data/destinations";
 
@@ -133,7 +133,7 @@ function Navbar({ introComplete = true }) {
       <div className="nav-container">
         {/* Left — Logo */}
         <div
-          className="logo"
+          className={`logo ${isSearchOpen ? "search-active" : ""}`}
           onClick={() => { setLogoRotation(logoRotation + 360); navigate("/"); }}
           style={{ cursor: "pointer" }}
         >
@@ -156,7 +156,7 @@ function Navbar({ introComplete = true }) {
           {navItems.map((item, i) => (
             <motion.li
               key={item}
-              className={activeNav === item ? "active-nav" : ""}
+              className={`nav-item ${activeNav === item ? "active-nav" : ""}`}
               onClick={() => handleNavClick(item)}
               onKeyDown={(e) => e.key === "Enter" && handleNavClick(item)}
               tabIndex={0}
@@ -166,54 +166,74 @@ function Navbar({ introComplete = true }) {
               animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
               transition={{ duration: 0.4, ease: easeOut, delay: 0.1 + i * 0.04 }}
             >
-              {item}
+              <span className="nav-item-text">{item}</span>
+              {activeNav === item && (
+                <motion.div
+                  layoutId="active-nav-indicator"
+                  className="nav-indicator"
+                  initial={false}
+                  transition={{
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 30,
+                  }}
+                />
+              )}
             </motion.li>
           ))}
         </ul>
 
         {/* Right — Icons & Search */}
         <div className="nav-right-section" ref={searchRef}>
-          <motion.div className="nav-actions-wrapper" layout transition={spring}>
+          {/* Search Component */}
+          <div className="search-wrapper">
             <AnimatePresence mode="wait">
               {!isSearchOpen ? (
                 <motion.div
                   key="search-trigger"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <FaSearch
-                    className="icon search-trigger"
+                  <motion.div
+                    whileHover={{ scale: 1.15 }}
+                    className="icon-wrapper"
                     onClick={() => setIsSearchOpen(true)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label="Open destination search"
-                    onKeyDown={(e) => e.key === "Enter" && setIsSearchOpen(true)}
-                  />
+                  >
+                    <LuSearch
+                      className="icon search-trigger"
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Open destination search"
+                      onKeyDown={(e) => e.key === "Enter" && setIsSearchOpen(true)}
+                    />
+                  </motion.div>
                 </motion.div>
               ) : (
                 <motion.div
                   key="search-bar"
                   className="search-bar-container"
-                  initial={{ width: 0, opacity: 0, x: 10 }}
+                  initial={{ width: 0, opacity: 0, originX: 1 }}
                   animate={{
-                    width: isFocused || searchQuery ? "min(380px, 50vw)" : "min(280px, 40vw)",
+                    width: isFocused || searchQuery 
+                      ? "min(380px, 45vw)" 
+                      : "min(280px, 35vw)",
                     opacity: 1,
-                    x: 0,
                   }}
-                  exit={{ width: 0, opacity: 0, x: 10 }}
+                  exit={{ width: 0, opacity: 0, originX: 1 }}
                   transition={{
                     type: "spring",
-                    stiffness: 400,
-                    damping: 38,
+                    stiffness: 350,
+                    damping: 30,
+                    opacity: { duration: 0.2 }
                   }}
                 >
                   <div
                     className={`search-input-field ${isFocused || searchQuery ? "focused" : ""}`}
                     role="search"
                   >
-                    <FaSearch className="search-field-icon" aria-hidden="true" />
+                    <LuSearch className="search-field-icon" aria-hidden="true" />
                     <input
                       ref={searchInputRef}
                       type="search"
@@ -227,7 +247,7 @@ function Navbar({ introComplete = true }) {
                       aria-autocomplete="list"
                       aria-expanded={searchQuery.length > 0}
                     />
-                    <FaTimes
+                    <LuX
                       className="search-close-btn"
                       onClick={() => {
                         setIsSearchOpen(false);
@@ -283,51 +303,57 @@ function Navbar({ introComplete = true }) {
                 </motion.div>
               )}
             </AnimatePresence>
+          </div>
 
-            <motion.div layout transition={spring}>
-              <FaUser
+          <div className="stable-actions">
+            {/* User Profile */}
+            <motion.div
+              whileHover={{ scale: 1.15 }}
+              className="icon-wrapper"
+              onClick={() => navigate("/auth")}
+            >
+              <LuUser
                 className="icon profile-trigger"
-                onClick={() => navigate("/auth")}
                 role="button"
                 tabIndex={0}
                 aria-label="Sign in or create account"
                 onKeyDown={(e) => e.key === "Enter" && navigate("/auth")}
               />
             </motion.div>
-          </motion.div>
 
-          {/* Hamburger Button (mobile only) */}
-          <button
-            className="hamburger-btn"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <AnimatePresence mode="wait">
-              {isMobileMenuOpen ? (
-                <motion.span
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <FaTimes />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="open"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <FaBars />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
+            {/* Hamburger Button (mobile only) */}
+            <button
+              className="hamburger-btn"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <LuX />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="open"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <LuMenu />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
       </div>
 

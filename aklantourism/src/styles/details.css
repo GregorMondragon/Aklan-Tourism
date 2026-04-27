@@ -462,14 +462,17 @@
 .dtl-lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(4, 8, 15, 0.7); /* Lightened from 0.9 */
-  backdrop-filter: blur(15px); /* Reduced from 25px */
+  background: rgba(4, 8, 15, 0.7);
+  /* Lightened from 0.9 */
+  backdrop-filter: blur(15px);
+  /* Reduced from 25px */
   -webkit-backdrop-filter: blur(15px);
-  z-index: 1090; 
+  z-index: 1090;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 8vw 8vw; /* Added 100px top padding to avoid navbar */
+  padding: 100px 8vw 8vw;
+  /* Added 100px top padding to avoid navbar */
 }
 
 .dtl-lightbox-content {
@@ -485,11 +488,12 @@
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 82vh; /* Respect space for navbar/header if needed */
+  max-height: 82vh;
+  /* Respect space for navbar/header if needed */
   object-fit: contain;
   display: block;
   border-radius: 12px;
-  box-shadow: 
+  box-shadow:
     0 30px 100px rgba(0, 0, 0, 0.6),
     0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -610,6 +614,7 @@
 
 /* Merged @media (max-width: 480px) — was duplicated in original */
 @media (max-width: 480px) {
+
   .dtl-collage-top,
   .dtl-collage-middle {
     grid-template-columns: 1fr;

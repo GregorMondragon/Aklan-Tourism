@@ -93,33 +93,81 @@ const FeaturedDestination = () => {
   // ── Animation Variants ──
   // Transition variants specifically for the content swap
   const contentVariants = {
-    initial: { opacity: 0, y: 20, filter: "blur(10px)" },
-    animate: {
+    hidden: { opacity: 0 },
+    visible: {
       opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
       transition: {
-        duration: 0.6,
-        ease: easeOut,
         staggerChildren: 0.1,
-        delayChildren: 0.1
+        delayChildren: 0.2
       }
     },
     exit: {
       opacity: 0,
-      y: -20,
-      filter: "blur(10px)",
-      transition: { duration: 0.4, ease: easeOut }
+      x: -20,
+      transition: { duration: 0.4, ease: "easeInOut" }
     }
   };
 
-  const childVariants = {
-    initial: { opacity: 0, y: 15, filter: "blur(5px)" },
-    animate: {
+  const eyebrowVariants = {
+    hidden: { opacity: 0, y: -30 },
+    visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.5, ease: easeOut }
+      transition: { duration: 0.8, ease: easeOut }
+    }
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 1.2, ease: easeOut }
+    }
+  };
+
+  const taglineVariants = {
+    hidden: { opacity: 0, x: 60, italic: true },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 1.0, ease: easeOut }
+    }
+  };
+
+  const descVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 1.1, ease: easeOut }
+    }
+  };
+
+  const statItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: easeOut }
+    }
+  };
+
+  const ctaVariants = {
+    hidden: { opacity: 0, scale: 0.85, y: 30 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { duration: 0.9, ease: easeOut }
+    }
+  };
+
+  const statsContainerVariants = {
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+      }
     }
   };
 
@@ -127,23 +175,51 @@ const FeaturedDestination = () => {
   const scrollReveal = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+      transition: { staggerChildren: 0.25, delayChildren: 0.1 }
     }
   };
 
   const itemReveal = {
-    hidden: { opacity: 0, y: 40, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: 60, scale: 0.94, rotateX: "15deg" },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
+      scale: 1,
+      rotateX: "0deg",
+      transition: { duration: 2, ease: easeOut }
+    }
+  };
+
+  const labelReveal = {
+    hidden: { opacity: 0, y: -40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 2, ease: easeOut }
+    }
+  };
+
+  const contentReveal = {
+    hidden: { opacity: 0, x: -60 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 2, ease: easeOut }
+    }
+  };
+
+  const cardsReveal = {
+    hidden: { opacity: 0, x: 60 },
+    visible: {
+      opacity: 1,
+      x: 0,
       transition: { duration: 2, ease: easeOut }
     }
   };
 
   const bgReveal = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1.2 } }
+    hidden: { opacity: 0, scale: 1.15 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 2, ease: easeOut } }
   };
 
   return (
@@ -175,7 +251,7 @@ const FeaturedDestination = () => {
       {/* ═══ TOP LABEL ═══ */}
       <motion.div
         className="featured-label-row"
-        variants={itemReveal}
+        variants={labelReveal}
       >
         <motion.span
           className="featured-label-line"
@@ -199,33 +275,31 @@ const FeaturedDestination = () => {
       </motion.div>
 
       {/* ═══ MAIN LAYOUT ═══ */}
-      <div className="featured-container">
+      <motion.div className="featured-container">
 
         {/* ── LEFT: Text content ── */}
-        <motion.div
-          className="featured-content"
-          variants={itemReveal}
-        >
+        <motion.div className="featured-content">
           <AnimatePresence mode="wait">
             <motion.div
               key={`content-${activeIndex}`}
               className="featured-text-block"
               variants={contentVariants}
-              initial="initial"
-              animate="animate"
+              initial="hidden"
+              whileInView="visible"
               exit="exit"
+              viewport={{ once: false, amount: 0.1 }}
             >
-              <motion.div className="feat-eyebrow" variants={childVariants}>
+              <motion.div className="feat-eyebrow" variants={eyebrowVariants}>
                 <span className="feat-category-tag">{active.category}</span>
                 <span className="feat-sep">·</span>
                 <span className="feat-location">📍 {active.location}</span>
               </motion.div>
 
-              <motion.h2 className="feat-title" variants={childVariants}>
+              <motion.h2 className="feat-title" variants={titleVariants}>
                 {active.name}
               </motion.h2>
 
-              <motion.p className="feat-tagline" variants={childVariants}>
+              <motion.p className="feat-tagline" variants={taglineVariants}>
                 "{active.tagline}"
               </motion.p>
 
@@ -237,43 +311,44 @@ const FeaturedDestination = () => {
                 style={{ originX: 0 }}
               />
 
-              <motion.p className="feat-desc" variants={childVariants}>
+              <motion.p className="feat-desc" variants={descVariants}>
                 {active.description}
               </motion.p>
 
-              <div className="feat-stats">
+              <motion.div
+                className="feat-stats"
+                variants={statsContainerVariants}
+              >
                 {active.stats.map((s, i) => (
                   <motion.div
                     key={i}
                     className="feat-stat"
-                    variants={childVariants}
+                    variants={statItemVariants}
                   >
                     <span className="feat-stat-icon">{s.icon}</span>
                     <span className="feat-stat-label">{s.label}</span>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
+              <motion.button
+                className="feat-cta-btn"
+                variants={ctaVariants}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() =>
+                  navigate("/destinations", { state: { openDestinationId: active.id } })
+                }
+              >
+                View Destination
+              </motion.button>
             </motion.div>
           </AnimatePresence>
-
-          {/* ── CTA Button ── */}
-          <motion.button
-            className="feat-cta-btn"
-            variants={itemReveal}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            onClick={() =>
-              navigate("/destinations", { state: { openDestinationId: active.id } })
-            }
-          >
-            View Destination
-          </motion.button>
         </motion.div>
 
         {/* ── RIGHT: Cards + Navigation ── */}
         <motion.div
           className="featured-right"
-          variants={itemReveal}
+          variants={cardsReveal}
         >
 
           {/* Card stack */}
@@ -281,15 +356,40 @@ const FeaturedDestination = () => {
             <AnimatePresence mode="popLayout" initial={false}>
               {[0, 1, 2].map((offset, index) => {
                 const item = destinations[getIndex(offset)];
+                const isActive = index === 0;
+
                 return (
                   <motion.div
                     key={`card-${item.name}`}
+                    layout
                     layoutId={`card-${item.name}`}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: index === 0 ? 1 : 0.7, y: 0 }}
-                    exit={{ opacity: 0, y: 30, transition: { duration: 0.3 } }}
-                    transition={{ duration: 1.0, ease: easeOut, delay: index * 0.08 }}
-                    className={`card ${index === 0 ? "card-active" : "card-preview"}`}
+                    initial={{ opacity: 0, x: 40, scale: 0.9 }}
+                    animate={{
+                      opacity: isActive ? 1 : 0.65,
+                      x: 0,
+                      scale: isActive ? 1.08 : 1,
+                      zIndex: 3 - index,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      x: -40,
+                      scale: 0.8,
+                      transition: { duration: 0.4, ease: "easeInOut" }
+                    }}
+                    transition={{
+                      layout: {
+                        duration: 0.7,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: index * 0.04
+                      },
+                      opacity: { duration: 0.4, delay: index * 0.04 },
+                      scale: {
+                        duration: 0.7,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: index * 0.04
+                      },
+                    }}
+                    className={`card ${isActive ? "card-active" : "card-preview"}`}
                     style={{ backgroundImage: `url(${item.image})` }}
                   >
                     <div className="card-gradient" />
@@ -335,7 +435,7 @@ const FeaturedDestination = () => {
           </div>
 
         </motion.div>
-      </div>
+      </motion.div>
     </motion.section>
   );
 };
