@@ -128,54 +128,26 @@ export default function PageIntro({ onComplete }) {
         />
 
         {/* Brand name */}
-        <motion.div
-          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easeOut, delay: 0.5 }}
-        >
-          <span style={{
-            fontSize: "1.9rem", fontWeight: 800, color: "#e8f0ff",
-            letterSpacing: "6px", fontFamily: "Ubuntu, sans-serif",
-            textTransform: "uppercase", lineHeight: 1,
-          }}>
-            AKLAN
-          </span>
-
-          {/* Animated separator line */}
-          <motion.div
-            style={{ height: 1, background: "linear-gradient(to right, transparent, rgba(140,190,255,0.7), transparent)" }}
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: 120, opacity: 1 }}
-            transition={{ duration: 0.9, ease: easeOut, delay: 0.75 }}
-          />
-
-          <motion.span
-            style={{
-              fontSize: "0.68rem", fontWeight: 500, color: "rgba(160,200,255,0.75)",
-              letterSpacing: "5px", fontFamily: "Ubuntu, sans-serif", textTransform: "uppercase",
-            }}
-            initial={{ opacity: 0, letterSpacing: "12px" }}
-            animate={{ opacity: 1, letterSpacing: "5px" }}
-            transition={{ duration: 1.0, ease: easeOut, delay: 0.85 }}
-          >
-            · TOURISM ·
-          </motion.span>
-        </motion.div>
-
-        {/* Tagline */}
-        <motion.p
+        {/* New Header */}
+        <motion.h1
           style={{
-            fontSize: "0.78rem", color: "rgba(160,200,255,0.5)",
-            letterSpacing: "3px", fontFamily: "Ubuntu, sans-serif",
-            textTransform: "uppercase", margin: "8px 0 0",
+            fontSize: "clamp(1.2rem, 4vw, 2rem)",
+            fontWeight: 800,
+            color: "#e8f0ff",
+            letterSpacing: "8px",
+            fontFamily: "Ubuntu, sans-serif",
+            textTransform: "uppercase",
+            margin: "20px 0 0",
+            textAlign: "center",
+            lineHeight: 1.2,
+            textShadow: "0 0 20px rgba(80,140,255,0.3)",
           }}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easeOut, delay: 1.1 }}
+          initial={{ opacity: 0, y: 20, letterSpacing: "14px" }}
+          animate={{ opacity: 1, y: 0, letterSpacing: "8px" }}
+          transition={{ duration: 1.2, ease: easeOut, delay: 0.6 }}
         >
-          Discover the Undiscovered
-        </motion.p>
+          Wonder of Aklan
+        </motion.h1>
       </motion.div>
     </AnimatePresence>
   );

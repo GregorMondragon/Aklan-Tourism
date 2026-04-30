@@ -4,7 +4,7 @@ import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaPaperPlane, FaFacebookF, FaIn
 import "../../styles/contactus.css";
 
 const easeOut = [0.16, 1, 0.3, 1];
-const scrollConfig = { once: false, amount: 0.1 };
+const scrollConfig = { once: true, amount: 0.1 };
 
 const socials = [
     { Icon: FaFacebookF, label: "Facebook", href: "https://facebook.com/" },
@@ -54,7 +54,7 @@ export default function ContactUs() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={scrollConfig}
-                    transition={{ duration: 0.8, ease: easeOut }}
+                    transition={{ duration: 1.5, ease: easeOut }}
                 >
                     <h1>Get in Touch</h1>
                     <p>
@@ -73,7 +73,7 @@ export default function ContactUs() {
                     initial={{ opacity: 0, y: 50, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={scrollConfig}
-                    transition={{ duration: 0.8, ease: easeOut }}
+                    transition={{ duration: 1.5, ease: easeOut }}
                 >
                     <img
                         src="/Images/Gregor DP.jpg"
@@ -91,6 +91,7 @@ export default function ContactUs() {
                         <p>
                             I am <strong>Gregor Allen B. Mondragon</strong>, a dedicated 3rd-year student at the <strong>College of Computer Studies, Aklan State University – Kalibo Campus</strong>, currently pursuing a <strong>Bachelor of Science in Information Technology, majoring in Software Engineering</strong>.
                         </p>
+                        <br></br>
                         <p>
                             As the sole developer and architect behind this platform, I have meticulously engineered every interaction—from the fluid animations and high-end UI design to the underlying software architecture. This project represents the intersection of my technical expertise and my deep-rooted passion for showcasing Aklan's unmatched beauty to the world through a premium, immersive digital experience.
                         </p>
@@ -125,7 +126,7 @@ export default function ContactUs() {
                                 initial={{ opacity: 0, x: -40 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={scrollConfig}
-                                transition={{ duration: 0.6, delay: idx * 0.15, ease: easeOut }}
+                                transition={{ duration: 1.5, delay: idx * 0.15, ease: easeOut }}
                             >
                                 <div className="cu-icon">{info.icon}</div>
                                 <div>
@@ -141,7 +142,7 @@ export default function ContactUs() {
                             initial={{ opacity: 0, x: -40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={scrollConfig}
-                            transition={{ duration: 0.6, delay: 0.45, ease: easeOut }}
+                            transition={{ duration: 1.5, delay: 0.45, ease: easeOut }}
                         >
                             <div className="cu-socials-content">
                                 <h4>Follow Wonders Of Aklan on Social Media</h4>
@@ -162,7 +163,7 @@ export default function ContactUs() {
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={scrollConfig}
-                        transition={{ duration: 0.8, ease: easeOut, delay: 0.2 }}
+                        transition={{ duration: 1.5, ease: easeOut, delay: 0.2 }}
                     >
                         <h2>Send a Message</h2>
                         <form onSubmit={handleSubmit}>

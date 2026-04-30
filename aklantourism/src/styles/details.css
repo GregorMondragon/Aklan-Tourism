@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────
    Destination Details Page
-   Palette: #0b1f45 navy / #eef2f7 bg / white cards
+   Palette: #0b1f45 navy / #e5f2ff bg / white cards
    Font: Ubuntu / Ubuntu Condensed
 ───────────────────────────────────────── */
 
@@ -24,7 +24,7 @@
 
 .dtl-overlay::-webkit-scrollbar-thumb {
   background: rgba(11, 31, 69, 0.15);
-  border: 2px solid #eef2f7;
+  border: 2px solid #e5f2ff;
   border-radius: 10px;
 }
 
@@ -36,7 +36,7 @@
 .dtl-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top left, #fbfcfd, #eef2f7);
+  background: #e5f2ff;
   z-index: 1000;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -85,8 +85,9 @@
 }
 
 .dtl-back-arrow {
-  font-size: 1.1rem;
-  line-height: 1;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
   color: #0b1f45;
 }
 
@@ -247,7 +248,10 @@
 }
 
 .dtl-status-icon {
-  font-size: 1.05rem;
+  font-size: 1.2rem;
+  color: #3a6fc4;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* ── Key Characteristics ── */
@@ -279,8 +283,11 @@
 }
 
 .dtl-char-icon {
-  font-size: 1.5rem;
-  line-height: 1;
+  font-size: 1.8rem;
+  color: #3a6fc4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dtl-char-label {
@@ -380,10 +387,19 @@
   color: #3a6fc4;
   text-align: left;
   letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
 }
 
 .dtl-nearby-link:hover {
   color: #0b1f45;
+  gap: 10px;
+}
+
+.dtl-nearby-arrow {
+  font-size: 1rem;
 }
 
 /* ── Destination Map ── */

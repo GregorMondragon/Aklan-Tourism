@@ -3,6 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import "../../styles/details.css";
 import DestinationMap from "./DestinationMap";
 import { destinations } from "../../data/destinations";
+import { 
+  LuMapPin, LuBus, LuTrendingUp, LuWaves, LuTreePalm, LuSunrise, 
+  LuShell, LuWind, LuFish, LuDroplets, LuAnchor, LuSparkles, 
+  LuBird, LuMountain, LuCompass, LuTent, LuCloudRain, LuThermometer, 
+  LuFlame, LuTheater, LuMusic, LuPartyPopper, LuChurch, LuHeart, 
+  LuHistory, LuShield, LuBird as LuDove, LuGem, LuTrees, LuLeaf, LuSailboat, LuArrowLeft, LuArrowRight
+} from "react-icons/lu";
 
 const easeOut = [0.16, 1, 0.3, 1];
 
@@ -24,7 +31,7 @@ const destinationDetails = {
         locationDetail: "Malay, Aklan (20-min ferry ride from Caticlan)",
         mapQuery: "Boracay White Beach, Malay, Aklan",
         characteristics: ["4km White Sand Shoreline", "Sunset Paraw Sailing", "Vibrant Station Nightlife"],
-        characteristicIcons: ["🏖️", "⛵", "🌅"],
+        characteristicIcons: [<LuTreePalm />, <LuSailboat />, <LuSunrise />],
         insiderTips: [
             "Visit Station 1 for the finest, most powdery white sand.",
             "Sunrise at Station 3 is peaceful and far from the crowds.",
@@ -52,7 +59,7 @@ const destinationDetails = {
         locationDetail: "Yapak, northern tip of Boracay Island",
         mapQuery: "Puka Shell Beach, Boracay, Aklan",
         characteristics: ["Natural Puka Shell Sand", "Deep Crystal Blue Water", "Unspoiled & Uncrowded"],
-        characteristicIcons: ["🐚", "🌊", "🏝️"],
+        characteristicIcons: [<LuShell />, <LuWaves />, <LuTreePalm />],
         insiderTips: [
             "Best for sunset watching away from White Beach crowds.",
             "Bring your own food; fewer commercial dining options here.",
@@ -80,7 +87,7 @@ const destinationDetails = {
         locationDetail: "Buruanga, Aklan (western coast)",
         mapQuery: "Hinugtan Beach, Buruanga, Aklan",
         characteristics: ["White Sand & Rock Formations", "Vibrant Marine Life", "Completely Secluded"],
-        characteristicIcons: ["🪨", "🐠", "🤫"],
+        characteristicIcons: [<LuGem />, <LuFish />, <LuShield />],
         insiderTips: [
             "Only accessible by boat — arrange with locals in Buruanga.",
             "Snorkeling near the shore reveals colorful coral gardens.",
@@ -108,7 +115,7 @@ const destinationDetails = {
         locationDetail: "Tangalan, Aklan (northern coast)",
         mapQuery: "Jawili Beach, Tangalan, Aklan",
         characteristics: ["Adjacent to Jawili Falls", "Calm & Shallow Shore", "Fresh Seafood Restaurants"],
-        characteristicIcons: ["⛲", "🛶", "🍤"],
+        characteristicIcons: [<LuWaves />, <LuAnchor />, <LuFish />],
         insiderTips: [
             "Combine with a Jawili Falls visit — they are a 5-minute walk apart.",
             "Known for very affordable fresh seafood along the beachfront.",
@@ -136,7 +143,7 @@ const destinationDetails = {
         locationDetail: "Malay mainland coast, Aklan",
         mapQuery: "Malay, Aklan",
         characteristics: ["Sea Turtle Nesting Grounds", "Intact Coral Reefs", "Pristine White Sand"],
-        characteristicIcons: ["🐢", "🪸", "✨"],
+        characteristicIcons: [<LuWaves />, <LuWaves />, <LuSparkles />],
         insiderTips: [
             "Best non-Boracay snorkeling spot in the Aklan area.",
             "High chance of spotting sea turtles in their natural habitat.",
@@ -164,7 +171,7 @@ const destinationDetails = {
         locationDetail: "Brgy. Caano, Kalibo, Aklan (near the airport)",
         mapQuery: "Bakhawan Eco-Park, Kalibo, Aklan",
         characteristics: ["1.3km Bamboo Boardwalk", "Award-Winning Mangrove Park", "Rich Birdwatching"],
-        characteristicIcons: ["🎋", "🌿", "🦅"],
+        characteristicIcons: [<LuTrees />, <LuLeaf />, <LuBird />],
         insiderTips: [
             "Walk the full boardwalk to find the hidden 'Sea Meeting Point' pavilion at the end.",
             "6:00 AM is the golden hour for birdwatching and quiet reflection.",
@@ -192,7 +199,7 @@ const destinationDetails = {
         locationDetail: "Tangalan, Aklan (northern Aklan coast)",
         mapQuery: "Jawili Falls, Tangalan, Aklan",
         characteristics: ["Seven Natural Basins", "Natural Limestone Pools", "Adjacent to Jawili Beach"],
-        characteristicIcons: ["💧", "🏊", "🌿"],
+        characteristicIcons: [<LuDroplets />, <LuWaves />, <LuLeaf />],
         insiderTips: [
             "Each of the seven basins has a different depth — explore them all.",
             "The water is coolest and clearest in the early morning.",
@@ -220,7 +227,7 @@ const destinationDetails = {
         locationDetail: "Buruanga, Aklan (across from Boracay Island)",
         mapQuery: "Ariel's Point, Buruanga, Aklan",
         characteristics: ["Five Cliff Diving Platforms", "Kayaking & Snorkeling", "Inclusive Day-Trip Package"],
-        characteristicIcons: ["🏕️", "🚣", "🤿"],
+        characteristicIcons: [<LuTent />, <LuWaves />, <LuCompass />],
         insiderTips: [
             "Platforms range from 3m to 15m — start low and work your way up.",
             "The all-inclusive tour package includes meals and unlimited drinks.",
@@ -248,7 +255,7 @@ const destinationDetails = {
         locationDetail: "Nabaoy, Malay, Aklan (inland, highland municipality)",
         mapQuery: "nagata falls, Malay, Aklan",
         characteristics: ["One of Aklan's Tallest Falls", "Misty Highland Setting", "Refreshing Natural Pool"],
-        characteristicIcons: ["💦", "🏔️", "🌡️"],
+        characteristicIcons: [<LuCloudRain />, <LuMountain />, <LuThermometer />],
         insiderTips: [
             "Hire a local habal-habal (motorcycle taxi) from Libacao town proper.",
             "The trail requires a moderate 30-minute hike — wear sturdy footwear.",
@@ -276,7 +283,7 @@ const destinationDetails = {
         locationDetail: "Malay, Aklan (mainland area)",
         mapQuery: "Pangihan Cave, Malay, Aklan",
         characteristics: ["Eight Dramatic Chambers", "Stalactite & Stalagmite Formations", "Ancient Cave History"],
-        characteristicIcons: ["🕯️", "🪨", "🦇"],
+        characteristicIcons: [<LuFlame />, <LuGem />, <LuBird />],
         insiderTips: [
             "Always go with a local guide — the cave system can be disorienting.",
             "Bring a headlamp or torch as some chambers are completely dark.",
@@ -304,7 +311,7 @@ const destinationDetails = {
         locationDetail: "Tagas, Tangalan, Aklan (rolling highland area)",
         mapQuery: "Tagas Hills, Tagas, Tangalan, Aklan",
         characteristics: ["Panoramic Countryside Views", "Rolling Green Landscape", "Peaceful Highland Retreat"],
-        characteristicIcons: ["🌄", "🌿", "🏕️"],
+        characteristicIcons: [<LuSunrise />, <LuLeaf />, <LuTent />],
         insiderTips: [
             "Best visited at sunrise or sunset for the most dramatic views.",
             "Bring a picnic — the hilltop is a perfect, breezy resting spot.",
@@ -332,7 +339,7 @@ const destinationDetails = {
         locationDetail: "Kalibo, Aklan (town center and cathedral grounds)",
         mapQuery: "Kalibo Pastrana Park, Kalibo, Aklan",
         characteristics: ["Mother of All PH Festivals", "Tribal Dancing & Drumming", "Vibrant Body Painting"],
-        characteristicIcons: ["🥁", "🎭", "🎉"],
+        characteristicIcons: [<LuMusic />, <LuTheater />, <LuPartyPopper />],
         insiderTips: [
             "Book accommodations 3–6 months in advance for January dates.",
             "The main street parade on the final Sunday is the grandest spectacle.",
@@ -360,7 +367,7 @@ const destinationDetails = {
         locationDetail: "Kalibo town center, Aklan",
         mapQuery: "Kalibo Cathedral, Kalibo, Aklan",
         characteristics: ["19th Century Architecture", "Center of Ati-Atihan Festival", "Active Parish Church"],
-        characteristicIcons: ["⛪", "🕯️", "🙏"],
+        characteristicIcons: [<LuChurch />, <LuFlame />, <LuHeart />],
         insiderTips: [
             "The cathedral is the epicenter of all Ati-Atihan Festival activities.",
             "Visit at dusk when the facade is beautifully illuminated.",
@@ -388,7 +395,7 @@ const destinationDetails = {
         locationDetail: "Kalibo, Aklan (town center area)",
         mapQuery: "Aklan Freedom Shrine, Kalibo, Aklan",
         characteristics: ["Monument to 18 Martyrs", "Aklan Revolution History", "Peaceful Grounds"],
-        characteristicIcons: ["🏛️", "🪖", "🕊️"],
+        characteristicIcons: [<LuHistory />, <LuShield />, <LuDove />],
         insiderTips: [
             "A solemn and significant site honoring the martyrs of the Aklan Revolution.",
             "Read the inscribed names and stories — each one is a piece of local history.",
@@ -420,7 +427,7 @@ function buildFallbackDetail(dest) {
         locationDetail: `${dest.location}, Aklan`,
         mapQuery: `${dest.name}, Aklan`,
         characteristics: ["Natural Beauty", "Local Culture", "Scenic Views"],
-        characteristicIcons: ["🌿", "🎭", "🏞️"],
+        characteristicIcons: [<LuLeaf />, <LuTheater />, <LuMountain />],
         insiderTips: [
             "Best visited during dry season (November – May).",
             "Hire a local guide for the best experience.",
@@ -451,8 +458,10 @@ export default function DestinationDetails({ destination, onBack, onSelectDestin
     useEffect(() => {
         const originalStyle = window.getComputedStyle(document.body).overflow;
         document.body.style.overflow = "hidden";
+        document.body.classList.add("details-open");
         return () => {
             document.body.style.overflow = originalStyle;
+            document.body.classList.remove("details-open");
         };
     }, []);
 
@@ -529,7 +538,7 @@ export default function DestinationDetails({ destination, onBack, onSelectDestin
                         whileHover={{ x: -6, backgroundColor: "#fff" }}
                         whileTap={{ scale: 0.96 }}
                     >
-                        <span className="dtl-back-arrow">←</span>
+                        <span className="dtl-back-arrow"><LuArrowLeft /></span>
                         BACK
                     </motion.button>
 
@@ -608,17 +617,17 @@ export default function DestinationDetails({ destination, onBack, onSelectDestin
                                     <tr>
                                         <td>Location</td>
                                         <td>{detail.locationDetail}</td>
-                                        <td><span className="dtl-status-icon">📍</span></td>
+                                        <td><span className="dtl-status-icon"><LuMapPin /></span></td>
                                     </tr>
                                     <tr>
                                         <td>Access</td>
                                         <td>{detail.access}</td>
-                                        <td><span className="dtl-status-icon">🚐</span></td>
+                                        <td><span className="dtl-status-icon"><LuBus /></span></td>
                                     </tr>
                                     <tr>
                                         <td>Popularity</td>
                                         <td>{detail.popularity}</td>
-                                        <td><span className="dtl-status-icon">📈</span></td>
+                                        <td><span className="dtl-status-icon"><LuTrendingUp /></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -705,7 +714,7 @@ export default function DestinationDetails({ destination, onBack, onSelectDestin
                                                     handleNearbyClick(w.name);
                                                 }}
                                             >
-                                                View Details →
+                                                View Details <LuArrowRight className="dtl-nearby-arrow" />
                                             </button>
                                         </div>
                                     </motion.div>

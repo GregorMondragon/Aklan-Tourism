@@ -36,6 +36,9 @@
   color: #fff;
   max-width: 1100px;
   padding: 0 40px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .abt-hero-content h1 {
@@ -59,6 +62,9 @@
   margin-bottom: 60px;
   color: #fff;
   padding: 0 20px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .abt-section-header.dark {
@@ -127,6 +133,9 @@
 
 .abt-timeline-content {
   color: #fff;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .abt-timeline-content h3 {
@@ -196,7 +205,9 @@
   border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
-  transition: all 0.3s ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .abt-card-icon {
@@ -243,6 +254,9 @@
   border: 1px solid rgba(11, 31, 69, 0.05);
   display: flex;
   flex-direction: column;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .abt-stars {

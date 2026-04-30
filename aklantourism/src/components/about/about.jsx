@@ -6,7 +6,7 @@ const easeOut = [0.16, 1, 0.3, 1];
 
 // Defining a reusable continuous animation viewport config
 // amount: 0.1 means animate when 10% of the element is visible
-const scrollConfig = { once: false, amount: 0.1 };
+const scrollConfig = { once: true, amount: 0.1 };
 
 export default function About() {
     return (
@@ -19,7 +19,7 @@ export default function About() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={scrollConfig}
-                    transition={{ duration: 1.0, ease: easeOut }}
+                    transition={{ duration: 1.5, ease: easeOut }}
                 >
                     <h1>Discover Aklan's Hidden Wonders</h1>
                     <p>
@@ -35,7 +35,7 @@ export default function About() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={scrollConfig}
-                    transition={{ duration: 0.8, ease: easeOut }}
+                    transition={{ duration: 1.5, ease: easeOut }}
                 >
                     <h2>Our Mission & Purpose</h2>
                     <p>We exist to guide you through the raw natural beauty and colorful traditions of Aklan, step by step.</p>
@@ -48,8 +48,8 @@ export default function About() {
                             className="abt-timeline-content"
                             initial={{ opacity: 0, x: -50, scale: 0.95 }}
                             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                            viewport={{ once: false, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: easeOut }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 1.5, ease: easeOut }}
                         >
                             <h3>1. Explore Nature's Best</h3>
                             <p>We highlight Aklan's exclusive, off-the-beaten-path natural wonders, from the powdery white sands of Boracay to the majestic cascading waters of Jawili.</p>
@@ -62,8 +62,8 @@ export default function About() {
                             className="abt-timeline-content"
                             initial={{ opacity: 0, x: 50, scale: 0.95 }}
                             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                            viewport={{ once: false, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: easeOut, delay: 0.1 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 1.5, ease: easeOut, delay: 0.1 }}
                         >
                             <h3>2. Guide & Inform</h3>
                             <p>We provide comprehensive guides, interactive details, and insider tips to help travelers navigate and fully experience every popular and undiscovered destination.</p>
@@ -76,8 +76,8 @@ export default function About() {
                             className="abt-timeline-content"
                             initial={{ opacity: 0, x: -50, scale: 0.95 }}
                             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                            viewport={{ once: false, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: easeOut, delay: 0.2 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 1.5, ease: easeOut, delay: 0.2 }}
                         >
                             <h3>3. Celebrate Heritage</h3>
                             <p>We immerse you in Aklan's rich legacy. Discover the deeply rooted traditions of the rhythmic Ati-Atihan festival and the intricate artistry of Piña weaving.</p>
@@ -89,8 +89,8 @@ export default function About() {
                             className="abt-timeline-content"
                             initial={{ opacity: 0, x: 50, scale: 0.95 }}
                             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                            viewport={{ once: false, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: easeOut, delay: 0.3 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 1.5, ease: easeOut, delay: 0.3 }}
                         >
                             <h3>4. Inspire Wanderlust</h3>
                             <p>Our ultimate goal is to inspire your next great adventure by curating the most breathtaking stories, imagery, and information Aklan has to offer.</p>
@@ -107,7 +107,7 @@ export default function About() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={scrollConfig}
-                        transition={{ duration: 0.8, ease: easeOut }}
+                        transition={{ duration: 1.5, ease: easeOut }}
                     >
                         Our Philosophy
                     </motion.h2>
@@ -136,7 +136,7 @@ export default function About() {
                                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                 viewport={scrollConfig}
-                                transition={{ duration: 0.7, delay: idx * 0.15, ease: easeOut }}
+                                transition={{ duration: 1.5, delay: idx * 0.15, ease: easeOut }}
                                 whileHover={{ y: -10, backgroundColor: "rgba(255,255,255,0.15)" }}
                             >
                                 <div className="abt-card-icon">{card.icon}</div>
@@ -188,7 +188,7 @@ export default function About() {
                             initial={{ opacity: 0, y: 40, scale: 0.95 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={scrollConfig}
-                            transition={{ duration: 0.6, delay: idx * 0.15, ease: easeOut }}
+                            transition={{ duration: 1.5, delay: idx * 0.15, ease: easeOut }}
                             whileHover={{ y: -5, boxShadow: "0 15px 35px rgba(11,31,69,0.12)" }}
                         >
                             <div className="abt-stars">

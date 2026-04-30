@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../../styles/navbar.css";
 import { LuSearch, LuUser, LuX, LuMenu } from "react-icons/lu";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { destinations } from "../../data/destinations";
+import { useAuth } from "../../context/AuthContext";
 
 const easeOut = [0.16, 1, 0.3, 1];
 const spring = { type: "spring", stiffness: 350, damping: 35 };
@@ -24,10 +25,13 @@ function Navbar({ introComplete = true }) {
   const [isFocused, setIsFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const searchRef = useRef(null);
   const searchInputRef = useRef(null);
+  const profileRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const { currentUser, logout } = useAuth();
 
   const getActiveNav = () => {
     switch (location.pathname) {
@@ -97,12 +101,16 @@ function Navbar({ introComplete = true }) {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setIsSearchOpen(false);
       }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
     };
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setIsSearchOpen(false);
         setIsMobileMenuOpen(false);
+        setIsProfileOpen(false);
       }
     };
 
@@ -307,19 +315,75 @@ function Navbar({ introComplete = true }) {
 
           <div className="stable-actions">
             {/* User Profile */}
-            <motion.div
-              whileHover={{ scale: 1.15 }}
-              className="icon-wrapper"
-              onClick={() => navigate("/auth")}
-            >
-              <LuUser
-                className="icon profile-trigger"
-                role="button"
-                tabIndex={0}
-                aria-label="Sign in or create account"
-                onKeyDown={(e) => e.key === "Enter" && navigate("/auth")}
-              />
-            </motion.div>
+            <div className="profile-wrapper" ref={profileRef} style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <motion.div
+                whileHover={{ scale: 1.15 }}
+                className="icon-wrapper"
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                style={{ cursor: 'pointer', overflow: 'hidden', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                {currentUser?.photoURL ? (
+                  <img src={currentUser.photoURL} alt="Profile" style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }} />
+                ) : (
+                  <LuUser
+                    className="icon profile-trigger"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="User Profile"
+                    onKeyDown={(e) => e.key === "Enter" && setIsProfileOpen(!isProfileOpen)}
+                  />
+                )}
+              </motion.div>
+
+              <AnimatePresence>
+                {isProfileOpen && (
+                  <motion.div
+                    className="profile-dropdown"
+                    variants={dropdownVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    style={{
+                      position: 'absolute',
+                      top: '140%',
+                      right: 0,
+                      background: '#ffffff',
+                      backdropFilter: 'none',
+                      border: '1px solid rgba(0, 0, 0, 0.05)',
+                      borderRadius: '12px',
+                      padding: '0.5rem',
+                      minWidth: '200px',
+                      boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
+                      zIndex: 100,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.2rem'
+                    }}
+                  >
+                    {!currentUser ? (
+                      <>
+                        <div className="profile-dropdown-item" onClick={() => { navigate("/auth"); setIsProfileOpen(false); }} style={{ padding: '0.8rem 1rem', cursor: 'pointer', borderRadius: '8px', color: '#0f172a', transition: 'background 0.2s', fontWeight: 500 }}>
+                          Sign In / Sign Up
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div style={{ padding: '0.8rem 1rem', borderBottom: '1px solid #e2e8f0', marginBottom: '0.2rem' }}>
+                          <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Logged in as</span><br/>
+                          <span style={{ fontSize: '0.95rem', color: '#0f172a', fontWeight: 600 }}>{currentUser.displayName || currentUser.email}</span>
+                        </div>
+                        <div className="profile-dropdown-item" onClick={() => { logout(); setIsProfileOpen(false); }} style={{ padding: '0.8rem 1rem', cursor: 'pointer', borderRadius: '8px', color: '#ef4444', transition: 'background 0.2s', fontWeight: 500 }}>
+                          Log Out
+                        </div>
+                      </>
+                    )}
+                    <div className="profile-dropdown-item" onClick={() => { navigate("/privacy"); setIsProfileOpen(false); }} style={{ padding: '0.8rem 1rem', cursor: 'pointer', borderRadius: '8px', color: '#0f172a', transition: 'background 0.2s', fontWeight: 500 }}>
+                      Privacy & Security
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Hamburger Button (mobile only) */}
             <button

@@ -36,6 +36,9 @@
   position: relative;
   z-index: 2;
   padding: 0 40px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .cu-hero-content h1 {
@@ -77,7 +80,9 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  transition: all 0.4s ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .cu-profile:hover {
@@ -154,7 +159,9 @@
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  transition: all 0.3s ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .cu-info-card:hover {
@@ -228,6 +235,9 @@
   padding: 40px;
   color: #0b1f45;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .cu-form-card h2 {

@@ -96,29 +96,35 @@ const AklanFestival = () => {
       >
 
         {/* Left Column — Subtle Parallax */}
-        <motion.div className="left-column" style={{ y: yLeft }}>
+        <motion.div 
+          className="left-column" 
+          style={{ y: yLeft, willChange: 'transform' }}
+        >
           <motion.div className="image-wrapper large" variants={imageReveal}>
-            <img src="/Images/ati01.jpg" alt="Ati-Atihan Dancers" loading="lazy" />
+            <img src="/Images/ati01.jpg" alt="Ati-Atihan Dancers" loading="eager" />
           </motion.div>
           <motion.div className="image-wrapper small-wide" variants={imageReveal}>
-            <img src="/Images/ati02.jpg" alt="Ati-Atihan Celebration" loading="lazy" />
+            <img src="/Images/ati02.jpg" alt="Ati-Atihan Celebration" loading="eager" />
           </motion.div>
         </motion.div>
 
         {/* Middle Column — Strong Parallax (Floating) */}
-        <motion.div className="middle-column" style={{ y: yMiddle }}>
+        <motion.div 
+          className="middle-column" 
+          style={{ y: yMiddle, willChange: 'transform' }}
+        >
           <motion.div className="image-wrapper medium" variants={imageReveal}>
-            <img src="/Images/vibrantkalibo.jpg" alt="Vibrant Kalibo" loading="lazy" />
+            <img src="/Images/vibrantkalibo.jpg" alt="Vibrant Kalibo" loading="eager" />
           </motion.div>
           <motion.div className="image-wrapper medium-tall" variants={imageReveal}>
-            <img src="/Images/ati03.jpg" alt="Tribal Dancers" loading="lazy" />
+            <img src="/Images/ati03.jpg" alt="Tribal Dancers" loading="eager" />
           </motion.div>
         </motion.div>
 
         {/* Right Column — Immersive Content Reveal */}
         <motion.div 
           className="content-column" 
-          style={{ y: yContent }}
+          style={{ y: yContent, willChange: 'transform' }}
           variants={contentStagger}
         >
           <div style={{ overflow: 'hidden', perspective: '1000px' }}>

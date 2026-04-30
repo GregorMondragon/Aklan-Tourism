@@ -9,6 +9,9 @@
   /* Remove fixed height — let content drive it */
   min-height: 0;
   overflow: hidden;
+  /* Create a new stacking context to stabilize rendering */
+  isolation: isolate;
+  perspective: 1000px;
 }
 
 .grid-layout {
@@ -27,7 +30,12 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* Remove fixed 100vh */
+  /* Stabilize parallax movement */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: translate3d(0,0,0);
+  will-change: transform;
 }
 
 .image-wrapper img {
@@ -35,6 +43,13 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Force GPU acceleration with broader browser support */
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Limit repaint area */
+  contain: paint;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Image sizes — use clamp for fluid scaling */
@@ -53,14 +68,26 @@
     var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
     var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
-  transition: .3s linear;
+  /* Specific transitions to prevent Firefox repaint loops */
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   overflow: hidden;
+  /* Compositor stabilization */
+  opacity: 0.999;
 }
 
-.large:hover {
+.large:hover,
+.small-wide:hover,
+.medium:hover,
+.medium-tall:hover {
   --_i: 10%;
-  filter: grayscale(0);
+  filter: grayscale(0) brightness(1.05);
+  transform: scale(1.02) translate3d(0, -5px, 0);
+  z-index: 10;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.1) translate3d(0,0,0);
 }
 
 .small-wide {
@@ -78,14 +105,12 @@
     var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
     var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
-  transition: .3s linear;
+  /* Specific transitions to prevent Firefox repaint loops */
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   overflow: hidden;
-}
-
-.small-wide:hover {
-  --_i: 10%;
-  filter: grayscale(0);
+  /* Compositor stabilization */
+  opacity: 0.999;
 }
 
 .medium {
@@ -103,14 +128,12 @@
     var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
     var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
-  transition: .3s linear;
+  /* Specific transitions to prevent Firefox repaint loops */
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   overflow: hidden;
-}
-
-.medium:hover {
-  --_i: 10%;
-  filter: grayscale(0);
+  /* Compositor stabilization */
+  opacity: 0.999;
 }
 
 .medium-tall {
@@ -128,14 +151,12 @@
     var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
     var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
   filter: grayscale();
-  transition: .3s linear;
+  /* Specific transitions to prevent Firefox repaint loops */
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   overflow: hidden;
-}
-
-.medium-tall:hover {
-  --_i: 10%;
-  filter: grayscale(0);
+  /* Compositor stabilization */
+  opacity: 0.999;
 }
 
 /* ── Text / Content Column ── */
@@ -144,6 +165,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Stabilize parallax movement */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: translate3d(0,0,0);
+  will-change: transform;
 }
 
 .title {
@@ -218,7 +245,7 @@
 
 /* ══════════════════════════════════
    RESPONSIVE
-══════════════════════════════════ */
+   ══════════════════════════════════ */
 
 /* Tablet — stack image columns and text */
 @media (max-width: 900px) {

@@ -6,6 +6,7 @@ import WhyVisit from "../components/home/whyvisit";
 import FeaturedDestinations from "../components/home/featuredDestination";
 import Footer from "../components/home/footer";
 import AklanFestival from "../components/home/festivalAklan";
+import HistoricalBackground from "../components/home/historicalBackground";
 import PageIntro from "../components/home/PageIntro";
 
 function Home() {
@@ -28,6 +29,7 @@ function Home() {
         <WhyVisit />
         <FeaturedDestinations />
         <AklanFestival />
+        <HistoricalBackground />
       </main>
       <Footer />
     </>

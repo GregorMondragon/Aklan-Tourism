@@ -304,7 +304,7 @@ export default function DestinationsList() {
                 exit="exit"
                 layout
                 layoutId={`card-${dest.id}`}
-                whileHover={{ y: -6, boxShadow: "0 16px 48px rgba(11,31,69,0.14)", transition: { duration: 0.28, ease: easeOut } }}
+                whileHover={{ boxShadow: "0 16px 48px rgba(11,31,69,0.14)", transition: { duration: 1, ease: easeOut } }}
                 whileTap={{ scale: 0.98, transition: { duration: 0.12 } }}
               >
                 <div className="dest-card-img-wrap">

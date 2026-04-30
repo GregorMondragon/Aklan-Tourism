@@ -1,0 +1,82 @@
+.suggestions-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  position: relative;
+}
+
+.suggestions-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.suggestions-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.suggestions-header h2 {
+  font-size: 2rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--gold-primary);
+  margin-bottom: 0.5rem;
+}
+
+.suggestions-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.suggestions-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.suggestions-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.suggestions-form label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.suggestions-form input,
+.suggestions-form textarea {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.suggestions-form input:focus,
+.suggestions-form textarea:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.suggestions-form textarea {
+  resize: vertical;
+}
