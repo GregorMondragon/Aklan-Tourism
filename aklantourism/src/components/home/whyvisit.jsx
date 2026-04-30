@@ -187,7 +187,7 @@ function WhyVisit() {
           className="why-header"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.5 }}
         >
           <motion.div
             className="why-rule"
@@ -250,7 +250,7 @@ function WhyVisit() {
           className="why-grid"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: false, amount: 0.1 }}
         >
           {REASONS.map((r, i) => (
             <TiltCard key={r.id} variants={cardVariants} customDelay={1.5 + (i * 0.2)}>
