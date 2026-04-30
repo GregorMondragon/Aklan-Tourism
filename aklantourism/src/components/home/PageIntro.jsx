@@ -22,7 +22,7 @@ export default function PageIntro({ onComplete }) {
       setPhase("done");
       sessionStorage.setItem("aklanIntroPlayed", "true");
     }, 3000);
-    
+
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -146,7 +146,7 @@ export default function PageIntro({ onComplete }) {
           animate={{ opacity: 1, y: 0, letterSpacing: "8px" }}
           transition={{ duration: 1.2, ease: easeOut, delay: 0.6 }}
         >
-          Wonder of Aklan
+          Discover theWonders of Aklan
         </motion.h1>
       </motion.div>
     </AnimatePresence>

@@ -128,22 +128,38 @@ const HistoricalBackground = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.1 }}
-          variants={staggerContainer}
         >
-          <motion.div className="history-badge" variants={fadeUp}>
+          <motion.div 
+            className="history-badge"
+            variants={{
+              hidden: { opacity: 0, scale: 0.5, y: 30 },
+              visible: {
+                opacity: 1, scale: 1, y: 0,
+                transition: { type: "spring", stiffness: 250, damping: 15, delay: 0.2 }
+              }
+            }}
+          >
             Discover Our Roots
           </motion.div>
           <motion.h2
             className="history-title-main"
-            custom={0.4}
-            variants={clipReveal}
+            variants={{
+              hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+              visible: {
+                clipPath: "inset(0 0% 0 0)",
+                opacity: 1,
+                transition: { duration: 1.2, ease: [0.45, 0, 0.55, 1], delay: 0.5 }
+              }
+            }}
           >
             The Historical Background of Aklan
           </motion.h2>
           <p className="history-intro-text">
-            <motion.span variants={fadeUp}>
-              Aklan is situated in the Western Visayas region of the Philippines. It is divided into 327 Barangays grouped into 17 Municipalities of which Kalibo is considered the Capital Town.
-            </motion.span>
+            <SplitWord
+              text="Aklan is situated in the Western Visayas region of the Philippines. It is divided into 327 Barangays grouped into 17 Municipalities of which Kalibo is considered the Capital Town."
+              delay={1.1}
+              wordDelay={0.05}
+            />
           </p>
         </motion.div>
 

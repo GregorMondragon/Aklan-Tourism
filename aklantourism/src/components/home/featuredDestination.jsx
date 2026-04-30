@@ -113,7 +113,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: easeOut }
+      transition: { duration: 3.0, ease: easeOut }
     }
   };
 
@@ -122,7 +122,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1.2, ease: easeOut }
+      transition: { duration: 3.0, ease: easeOut }
     }
   };
 
@@ -131,7 +131,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1.0, ease: easeOut }
+      transition: { duration: 3.0, ease: easeOut }
     }
   };
 
@@ -140,7 +140,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1.1, ease: easeOut }
+      transition: { duration: 3.0, ease: easeOut }
     }
   };
 
@@ -149,7 +149,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: easeOut }
+      transition: { duration: 3.0, ease: easeOut }
     }
   };
 
@@ -159,7 +159,7 @@ const FeaturedDestination = () => {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { duration: 0.9, ease: easeOut }
+      transition: { duration: 3.0, ease: easeOut }
     }
   };
 
@@ -195,7 +195,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 2, ease: easeOut }
+      transition: { duration: 3, ease: easeOut }
     }
   };
 
@@ -204,7 +204,7 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 2, ease: easeOut }
+      transition: { duration: 3, ease: easeOut }
     }
   };
 
@@ -213,13 +213,13 @@ const FeaturedDestination = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 2, ease: easeOut }
+      transition: { duration: 3, ease: easeOut }
     }
   };
 
   const bgReveal = {
     hidden: { opacity: 0, scale: 1.15 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 2, ease: easeOut } }
+    visible: { opacity: 1, scale: 1, transition: { duration: 3, ease: easeOut } }
   };
 
   return (
@@ -278,7 +278,7 @@ const FeaturedDestination = () => {
       <motion.div className="featured-container">
 
         {/* ── LEFT: Text content ── */}
-        <motion.div className="featured-content">
+        <motion.div className="featured-content" variants={contentReveal}>
           <AnimatePresence mode="wait">
             <motion.div
               key={`content-${activeIndex}`}
@@ -378,13 +378,13 @@ const FeaturedDestination = () => {
                     }}
                     transition={{
                       layout: {
-                        duration: 0.7,
+                        duration: 1.8,
                         ease: [0.16, 1, 0.3, 1],
                         delay: index * 0.04
                       },
-                      opacity: { duration: 0.4, delay: index * 0.04 },
+                      opacity: { duration: 1.0, delay: index * 0.04 },
                       scale: {
-                        duration: 0.7,
+                        duration: 1.8,
                         ease: [0.16, 1, 0.3, 1],
                         delay: index * 0.04
                       },
