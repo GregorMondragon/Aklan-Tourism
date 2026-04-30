@@ -48,7 +48,7 @@
 
 .history-intro-block {
   text-align: center;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -64,7 +64,7 @@
 
 .history-title-main {
   font-family: 'Italiana', serif !important;
-  font-size: clamp(2.8rem, 6vw, 4.5rem) !important;
+  font-size: clamp(2.4rem, 6vw, 4rem) !important;
   font-weight: 400 !important;
   line-height: 1.1;
   margin-bottom: 24px;
@@ -73,8 +73,8 @@
 
 .history-intro-text {
   font-family: 'DM Sans', sans-serif !important;
-  font-size: clamp(1rem, 1.5vw, 1.15rem) !important;
-  font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 1.1rem) !important;
+  font-weight: 300;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -95,7 +95,7 @@
 .history-image-container {
   position: relative;
   width: 100%;
-  border-radius: 16px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
   background-color: #1a2a4a;
@@ -121,7 +121,7 @@
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4)) brightness(1.1);
-  border-radius: 16px;
+  border-radius: 5px;
 }
 
 /* Text Content blocks */
@@ -135,7 +135,7 @@
   /* More solid background to avoid filter overhead */
   border: 1px solid rgba(255, 255, 255, 0.055);
   padding: clamp(30px, 4vw, 50px);
-  border-radius: 16px;
+  border-radius: 5px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   will-change: transform;
 }
