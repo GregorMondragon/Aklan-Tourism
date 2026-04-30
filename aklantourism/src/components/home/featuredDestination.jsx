@@ -109,57 +109,57 @@ const FeaturedDestination = () => {
   };
 
   const eyebrowVariants = {
-    hidden: { opacity: 0, y: -30 },
+    hidden: { opacity: 0, y: -50 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 3.0, ease: easeOut }
+      transition: { duration: 2.0, ease: easeOut }
     }
   };
 
   const titleVariants = {
-    hidden: { opacity: 0, x: -100 },
+    hidden: { opacity: 0, x: -120 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 3.0, ease: easeOut }
+      transition: { duration: 2.0, ease: easeOut }
     }
   };
 
   const taglineVariants = {
-    hidden: { opacity: 0, x: 60, italic: true },
+    hidden: { opacity: 0, x: 120 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 3.0, ease: easeOut }
+      transition: { duration: 2.0, ease: easeOut }
     }
   };
 
   const descVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0, x: -100 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 3.0, ease: easeOut }
+      transition: { duration: 2.0, ease: easeOut }
     }
   };
 
   const statItemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 3.0, ease: easeOut }
-    }
-  };
-
-  const ctaVariants = {
-    hidden: { opacity: 0, scale: 0.85, y: 30 },
+    hidden: { opacity: 0, scale: 0.4, y: 20 },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { duration: 3.0, ease: easeOut }
+      transition: { type: "spring", damping: 15, stiffness: 100, duration: 2.0 }
+    }
+  };
+
+  const ctaVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 2.0, ease: easeOut }
     }
   };
 
@@ -191,11 +191,11 @@ const FeaturedDestination = () => {
   };
 
   const labelReveal = {
-    hidden: { opacity: 0, y: -40 },
+    hidden: { opacity: 0, y: -60 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 3, ease: easeOut }
+      transition: { duration: 2.0, ease: easeOut }
     }
   };
 
