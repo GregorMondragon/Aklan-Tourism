@@ -227,7 +227,7 @@ const FeaturedDestination = () => {
       className="featured"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       variants={scrollReveal}
     >
       {/* ── Animated Background Wrapper ── */}
@@ -257,7 +257,7 @@ const FeaturedDestination = () => {
           className="featured-label-line"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
           style={{ originX: 0 }}
         />
@@ -268,7 +268,7 @@ const FeaturedDestination = () => {
           className="featured-label-line"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
           style={{ originX: 1 }}
         />
@@ -287,7 +287,7 @@ const FeaturedDestination = () => {
               initial="hidden"
               whileInView="visible"
               exit="exit"
-              viewport={{ once: false, amount: 0.1 }}
+              viewport={{ once: true, amount: 0.1 }}
             >
               <motion.div className="feat-eyebrow" variants={eyebrowVariants}>
                 <span className="feat-category-tag">{active.category}</span>

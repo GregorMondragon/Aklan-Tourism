@@ -131,9 +131,9 @@
 }
 
 .history-text-card {
-  background: rgb(255, 255, 255);
+  background: rgba(0, 50, 143, 0.084);
   /* More solid background to avoid filter overhead */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.055);
   padding: clamp(30px, 4vw, 50px);
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -144,7 +144,7 @@
   font-family: 'Italiana', serif;
   font-size: clamp(3rem, 6vw, 4.5rem);
   line-height: 1;
-  color: #2d2d2d;
+  color: #ffffff;
   opacity: 0.8;
   margin-bottom: -15px;
 }
@@ -166,7 +166,7 @@
   font-family: 'DM Sans', sans-serif !important;
   font-size: clamp(0.95rem, 1.2vw, 1.05rem) !important;
   line-height: 1.8;
-  color: rgba(14, 31, 58, 0.75);
+  color: rgba(225, 225, 225, 0.75);
   margin-bottom: 16px;
 }
 
@@ -338,16 +338,18 @@
 @media (max-width: 900px) {
   .history-row {
     grid-template-columns: 1fr;
-    gap: 60px; /* Consistent gap for both rows */
+    gap: 60px;
+    /* Consistent gap for both rows */
   }
 
   .history-row.reverse {
     grid-template-columns: 1fr;
-    gap: 60px; /* Match the other row exactly */
+    gap: 60px;
+    /* Match the other row exactly */
   }
 
   /* Disable parallax offset on mobile so the vertical gaps don't change and crash */
-  .history-row > div {
+  .history-row>div {
     transform: none !important;
   }
 

@@ -23,10 +23,10 @@ const AklanFestival = () => {
 
   // Clean fade-up reveal for images
   const imageReveal = {
-    hidden: { 
+    hidden: {
       y: 60,
       scale: 1.1,
-      opacity: 0 
+      opacity: 0
     },
     visible: {
       y: 0,
@@ -39,9 +39,9 @@ const AklanFestival = () => {
   // 3D-tilt masked reveal for main title
   const textReveal = {
     hidden: { y: 80, opacity: 0, rotateX: "20deg" },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
+    visible: {
+      y: 0,
+      opacity: 1,
       rotateX: "0deg",
       transition: { duration: 2, ease: premiumEase }
     }
@@ -49,19 +49,19 @@ const AklanFestival = () => {
 
   const slideLeft = {
     hidden: { x: -100, opacity: 0 },
-    visible: { 
-      x: 0, 
-      opacity: 1, 
-      transition: { duration: 2, ease: premiumEase } 
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 2, ease: premiumEase }
     }
   };
 
   const slideRight = {
     hidden: { x: 100, opacity: 0 },
-    visible: { 
-      x: 0, 
-      opacity: 1, 
-      transition: { duration: 2, ease: premiumEase } 
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 2, ease: premiumEase }
     }
   };
 
@@ -96,8 +96,8 @@ const AklanFestival = () => {
       >
 
         {/* Left Column — Subtle Parallax */}
-        <motion.div 
-          className="left-column" 
+        <motion.div
+          className="left-column"
           style={{ y: yLeft, willChange: 'transform' }}
         >
           <motion.div className="image-wrapper large" variants={imageReveal}>
@@ -109,8 +109,8 @@ const AklanFestival = () => {
         </motion.div>
 
         {/* Middle Column — Strong Parallax (Floating) */}
-        <motion.div 
-          className="middle-column" 
+        <motion.div
+          className="middle-column"
           style={{ y: yMiddle, willChange: 'transform' }}
         >
           <motion.div className="image-wrapper medium" variants={imageReveal}>
@@ -122,8 +122,8 @@ const AklanFestival = () => {
         </motion.div>
 
         {/* Right Column — Immersive Content Reveal */}
-        <motion.div 
-          className="content-column" 
+        <motion.div
+          className="content-column"
           style={{ y: yContent, willChange: 'transform' }}
           variants={contentStagger}
         >
@@ -159,10 +159,10 @@ const AklanFestival = () => {
           <motion.button
             className="learn-btn"
             variants={textReveal}
-            whileHover={{ 
-              scale: 1.06, 
+            whileHover={{
+              scale: 1.06,
               backgroundColor: "#eeb437",
-              boxShadow: "0 10px 30px rgba(255, 187, 52, 0.4)" 
+              boxShadow: "0 10px 30px rgba(255, 187, 52, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/destinations', { state: { selectedDestId: 16 } })}

@@ -44,11 +44,10 @@ function SplitText({ text, className, delay = 0, charDelay = 0.03 }) {
               <motion.span
                 key={charIndex}
                 variants={{
-                  hidden: { opacity: 0, y: 15, filter: "blur(4px)", scale: 0.8 },
+                  hidden: { opacity: 0, y: 15, scale: 0.8 },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    filter: "blur(0px)",
                     scale: 1,
                     transition: {
                       type: "spring", damping: 15, stiffness: 350,
@@ -78,11 +77,10 @@ function SplitWord({ text, className, delay = 0, wordDelay = 0.05 }) {
         <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "pre" }}>
           <motion.span
             variants={{
-              hidden: { opacity: 0, y: 12, filter: "blur(3px)" },
+              hidden: { opacity: 0, y: 12 },
               visible: {
                 opacity: 1,
                 y: 0,
-                filter: "blur(0px)",
                 transition: {
                   type: "spring", damping: 15, stiffness: 250,
                   delay: delay + (wordIndex * wordDelay)
@@ -147,7 +145,7 @@ function TiltCard({ children, variants, customDelay }) {
           display: "flex",
           flexDirection: "column",
           cursor: "pointer",
-          willChange: "transform"
+          willChange: "transform, rotate"
         }}
         whileHover={{
           scale: 1.02,
@@ -189,7 +187,7 @@ function WhyVisit() {
           className="why-header"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           <motion.div
             className="why-rule"
@@ -252,7 +250,7 @@ function WhyVisit() {
           className="why-grid"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {REASONS.map((r, i) => (
             <TiltCard key={r.id} variants={cardVariants} customDelay={1.5 + (i * 0.2)}>

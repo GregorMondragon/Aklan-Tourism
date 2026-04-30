@@ -42,7 +42,7 @@ const HistoricalBackground = () => {
   // Handle scroll lock with Lenis
   useEffect(() => {
     if (!lenis) return;
-    
+
     if (showFullStory) {
       lenis.stop();
     } else {
@@ -57,16 +57,16 @@ const HistoricalBackground = () => {
 
   // Smooth spring physics for parallax
   const springConfig = { damping: 30, stiffness: 100, mass: 0.5 };
-  
+
   const yImage1Raw = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const yImage1 = useSpring(yImage1Raw, springConfig);
-  
+
   const yText1Raw = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const yText1 = useSpring(yText1Raw, springConfig);
 
   const yImage2Raw = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const yImage2 = useSpring(yImage2Raw, springConfig);
-  
+
   const yText2Raw = useTransform(scrollYProgress, [0, 1], [0, -160]);
   const yText2 = useSpring(yText2Raw, springConfig);
 
@@ -129,7 +129,7 @@ const HistoricalBackground = () => {
           whileInView="visible"
           viewport={{ once: false, amount: 0.1 }}
         >
-          <motion.div 
+          <motion.div
             className="history-badge"
             variants={{
               hidden: { opacity: 0, scale: 0.5, y: 30 },
@@ -222,7 +222,7 @@ const HistoricalBackground = () => {
               <motion.p className="history-body-text" variants={fadeUp}>
                 Regarded as to be the country’s oldest province, the written history of Aklan takes us back to the middle of the 13th century when ten Bornean datus, together with their families, fled the oppressive rule of the Bornean king, Sultan Makatunaw.
               </motion.p>
-              <motion.button 
+              <motion.button
                 className="history-read-more-btn"
                 variants={fadeUp}
                 onClick={() => setShowFullStory(true)}
@@ -254,14 +254,14 @@ const HistoricalBackground = () => {
       {/* Full Story Modal */}
       <AnimatePresence>
         {showFullStory && (
-          <motion.div 
+          <motion.div
             className="history-modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowFullStory(false)}
           >
-            <motion.div 
+            <motion.div
               className="history-modal-container"
               initial={{ y: 50, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -272,22 +272,22 @@ const HistoricalBackground = () => {
               <button className="history-modal-close" onClick={() => setShowFullStory(false)}>
                 ✕
               </button>
-              
+
               <div className="history-modal-content" data-lenis-prevent>
                 <h2 className="history-modal-title">The Epic Journey of Aklan</h2>
                 <div className="history-modal-text">
                   <p>Regarded as to be the country’s oldest province, the written history of Aklan takes us back to the middle of the 13th century when ten Bornean datus, together with their families, fled the oppressive rule of the Bornean king, Sultan Makatunaw.</p>
-                  
+
                   <p>In search for freedom, new lands and better fortunes, they left Borneo’s shore on a flotilla of balangays (ships) sailing northward. And one day, in 1250 (circa), they landed on the bank of the Sirwakan River near the present town of San Joaquin, Iloilo. Immediately after, Datu Puti, the leader of the expedition, came in contact with the Atis, the black-skinned, pygmy aborigines of Panay Island. The Ati king named Marikudo and his queen, Maniwang-tiwang, welcomed the newcomers. Datu Puti asked Marikudo if the latter’s people would be willing to move into the hinterlands and mountains in favor of the newcomers.</p>
-                  
+
                   <p>An agreement was reached. The price for the land was a gold saduk (wide-brimmed helmet), a chain of pure gold necklace, and some gifts consisting of colored clothes, decorated arms, and fanciful trinkets. The historic sale (Barter of Panay) was sealed by a sumptuous banquet attended by both the Atis and the Bornean peoples, and everybody had a joyous celebration – feasting, dancing and singing. The celebration is commemorated every year, during the blooming season of mangoes, or at about the same time of the year when the purchase was consummated.</p>
-                  
+
                   <p>In later years, when the Ati descendants of Marikudo withdrew to the mountains, the settlers chose to perpetuate the celebration. In the absence of the Atis, some of the settlers smeared themselves with soot to simulate the Atis. Thus, from then on, the celebration that has withstood the tests of centuries came to be known as the Ati-atihan Festival. The island of Panay was divided into three “sakups” (districts): Irong-Irong (now Iloilo) under Datu Paiburong; Hantik (now Antique) under Datu Sumakwel; and Aklan (what was then Aklan and Capiz combined) under Datu Bangkaya. These three “sakups” were united for mutual protection against enemy attacks into one confederation called “Confederation of Madyaas” under the overlordship of Datu Sumakwel who was the oldest and wisest of the ten Bornean datus.</p>
-                  
+
                   <p>Our historians have overlooked an interesting fact about Datu Bangkaya’s “sakup” of Aklan. It was originally (geographically and ethnologically also) the valley of Aklan, centering in the present town of Kalibo. Since the days of Datu Bangkaya, the people of this region have developed their own peculiar dialect, distinct customs and traditions, and local culture. Thus, it has come to pass that the present-day Aklanons posses a deep-rooted pride and loyalty to their own locality, setting them apart from the rest of the Capiceños. They fondly aspire to be an independent province, separate and independent from Capiz province. There is further historical validity to the Aklanons’ dream of a separate province. As early as 1433, according to Parayan historical records, there was already a well-organized government on Aklan soil under the rule of Kalantiaw, the third chief of Panay. This Aklan ruler wrote the famous “Kalantiaw Code” containing eighteen sugo (orders) which reveal the high degree of civilization which the people of Aklan had then.</p>
-                  
+
                   <p>Following that spirit of patriotic desire, after having developed their ideals of freedom and having progressed in education and culture, in commerce and industry, and in political maturity and experience, whenever occasions presented, the people of Aklan, through their chosen leaders, had taken the issue of separation and independence:</p>
-                  
+
                   <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '16px', color: 'rgba(255,255,255,0.7)' }}>
                     <li><strong>April 14, 1901:</strong> Don Natalio B. Acevedo, Aklan delegation head, presented the first memorial for the separation of Aklan from Capiz to the Junta Magna headed by Commissioner Dean C. Worcester.</li>
                     <li><strong>1920:</strong> Representatives Jose Alba Urquiola and Eufrosino Alba of the second and third districts of Capiz, respectively, presented a Bill for Aklan’s formal separation from Capiz.</li>
