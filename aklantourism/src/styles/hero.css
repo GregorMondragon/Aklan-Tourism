@@ -372,8 +372,8 @@
 .hero-cards {
   position: absolute;
   bottom: 0;
-  left: 35px;
-  right: 35px;
+  left: 100px;
+  right: 100px;
   gap: 10px;
   z-index: 10;
   display: grid;
@@ -509,6 +509,8 @@
 @media (max-width: 900px) {
   .hero-cards {
     grid-template-columns: repeat(2, 1fr);
+    left: 40px;
+    right: 40px;
   }
 
   .hero-card:nth-child(2) {
@@ -547,8 +549,10 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    padding: 0 14px;
+    padding: 0 24px;
     gap: 10px;
+    left: 0;
+    right: 0;
   }
 
   .hero-cards::-webkit-scrollbar {

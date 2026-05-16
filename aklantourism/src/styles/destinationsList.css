@@ -1,8 +1,16 @@
+/* ─── Outer Container — NEVER let this collapse (prevents footer glitch) ─── */
+.destinations-container-outer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ─── Section Wrapper ─── */
 .dest-section {
   background: #e5f2ff;
   min-height: 100vh;
   font-family: "Ubuntu", "Ubuntu Condensed", sans-serif;
+  flex: 1;
 }
 
 /* ─── Hero Banner ─── */
@@ -94,25 +102,44 @@
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   font-family: inherit;
   position: relative;
   isolation: isolate;
   flex-shrink: 0;
   white-space: nowrap;
+  /* Framer handles active state visually — no CSS transition needed */
 }
 
-.dest-filter-btn:hover {
-  background: rgba(11, 31, 69, 0.08);
+/* The spring-physics pill that slides between active buttons */
+.filter-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.13);
+  z-index: 0;
+}
+
+/* Button text sits above the pill */
+.filter-label {
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+  transition: font-weight 0.18s ease, color 0.18s ease;
+}
+
+.dest-filter-btn.active .filter-label {
+  font-weight: 700;
+  color: #0b1f45;
+}
+
+.dest-filter-btn:hover .filter-label {
+  color: #0b1f45;
 }
 
 .dest-filter-btn.active {
-  background: #fff;
+  /* background handled by .filter-pill via Framer layoutId */
   color: #0b1f45;
-  font-weight: 700;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* ─── Main Content Layout ─── */

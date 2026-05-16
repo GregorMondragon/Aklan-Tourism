@@ -39,8 +39,8 @@ function Auth() {
   const toggleMode = (isLoginMode) => {
     if (isLoading || isSuccess) return; // Prevent toggle during submit/success
     setIsLogin(isLoginMode);
-    setErrors({}); 
-    setFormData({ name: "", email: "", password: "", confirmPassword: "", agreeToPrivacy: false }); 
+    setErrors({});
+    setFormData({ name: "", email: "", password: "", confirmPassword: "", agreeToPrivacy: false });
     setShowPassword(false);
     setShowConfirmPassword(false);
     setResetSent(false);
@@ -51,7 +51,7 @@ function Auth() {
     if (!isLogin && !formData.name.trim()) {
       newErrors.name = "Required";
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = "Required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -103,14 +103,14 @@ function Auth() {
 
     setIsLoading(true);
     setErrors({ ...errors, form: null });
-    
+
     try {
       if (isLogin) {
         await login(formData.email, formData.password);
       } else {
         await signup(formData.email, formData.password, formData.name);
       }
-      
+
       setIsSuccess(true);
       setTimeout(() => {
         navigate("/");
@@ -121,7 +121,7 @@ function Auth() {
       if (error.code === "auth/email-already-in-use") errorMessage = "Email is already in use.";
       if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential") errorMessage = "Invalid email or password.";
       if (error.code === "auth/weak-password") errorMessage = "Password should be at least 6 characters.";
-      
+
       setErrors({ form: errorMessage });
       setIsLoading(false);
     }
@@ -132,8 +132,8 @@ function Auth() {
       <Link to="/" className="back-home">
         <FaArrowLeft /> Back to Home
       </Link>
-      
-      <motion.div 
+
+      <motion.div
         className="auth-card"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -146,16 +146,16 @@ function Auth() {
 
         <div className="auth-toggle">
           <div className={`toggle-slider ${!isLogin ? "signup" : ""}`}></div>
-          <button 
+          <button
             type="button"
-            className={isLogin ? "active" : ""} 
+            className={isLogin ? "active" : ""}
             onClick={() => toggleMode(true)}
           >
             Log In
           </button>
-          <button 
+          <button
             type="button"
-            className={!isLogin ? "active" : ""} 
+            className={!isLogin ? "active" : ""}
             onClick={() => toggleMode(false)}
           >
             Sign Up
@@ -164,10 +164,10 @@ function Auth() {
 
         <form className="auth-form" onSubmit={handleSubmit}>
           {errors.form && (
-            <motion.div 
-              className="minimal-error form-main-error" 
-              role="alert" 
-              initial={{ opacity: 0, y: -10 }} 
+            <motion.div
+              className="minimal-error form-main-error"
+              role="alert"
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               style={{ textAlign: 'center', marginBottom: '1rem', padding: '0.8rem', background: 'rgba(255, 77, 77, 0.1)', border: '1px solid rgba(255, 77, 77, 0.3)', borderRadius: '8px' }}
             >
@@ -177,7 +177,7 @@ function Auth() {
 
           <AnimatePresence mode="wait">
             {!isLogin && (
-              <motion.div 
+              <motion.div
                 key="name"
                 className="form-group"
                 initial={{ opacity: 0, height: 0 }}
@@ -187,11 +187,11 @@ function Auth() {
               >
                 <label htmlFor="auth-name" className="sr-only">Full Name</label>
                 <div className={`input-group ${errors.name ? 'has-error' : ''}`}>
-                  <input 
+                  <input
                     id="auth-name"
-                    type="text" 
+                    type="text"
                     name="name"
-                    placeholder="Full Name" 
+                    placeholder="Full Name"
                     value={formData.name}
                     onChange={handleInputChange}
                     disabled={isLoading || isSuccess}
@@ -201,7 +201,7 @@ function Auth() {
                   <FaUser className="input-icon" aria-hidden="true" />
                 </div>
                 {errors.name && (
-                  <motion.div id="name-error" className="minimal-error" role="alert" initial={{opacity:0}} animate={{opacity:1}}>
+                  <motion.div id="name-error" className="minimal-error" role="alert" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     {errors.name}
                   </motion.div>
                 )}
@@ -212,11 +212,11 @@ function Auth() {
           <div className="form-group">
             <label htmlFor="auth-email" className="sr-only">Email Address</label>
             <div className={`input-group ${errors.email ? 'has-error' : ''}`}>
-              <input 
+              <input
                 id="auth-email"
-                type="email" 
+                type="email"
                 name="email"
-                placeholder="Email Address" 
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleInputChange}
                 autoComplete="email"
@@ -227,7 +227,7 @@ function Auth() {
               <FaEnvelope className="input-icon" aria-hidden="true" />
             </div>
             {errors.email && (
-              <motion.div id="email-error" className="minimal-error" role="alert" initial={{opacity:0}} animate={{opacity:1}}>
+              <motion.div id="email-error" className="minimal-error" role="alert" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 {errors.email}
               </motion.div>
             )}
@@ -236,11 +236,11 @@ function Auth() {
           <div className="form-group">
             <label htmlFor="auth-password" className="sr-only">Password</label>
             <div className={`input-group ${errors.password ? 'has-error' : ''}`}>
-              <input 
+              <input
                 id="auth-password"
-                type={showPassword ? "text" : "password"} 
+                type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Password" 
+                placeholder="Password"
                 value={formData.password}
                 onChange={handleInputChange}
                 autoComplete="current-password"
@@ -249,8 +249,8 @@ function Auth() {
                 aria-describedby={errors.password ? "password-error" : undefined}
               />
               <FaLock className="input-icon" aria-hidden="true" />
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
@@ -259,11 +259,11 @@ function Auth() {
               </button>
             </div>
             {errors.password && (
-              <motion.div id="password-error" className="minimal-error" role="alert" initial={{opacity:0}} animate={{opacity:1}}>
+              <motion.div id="password-error" className="minimal-error" role="alert" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 {errors.password}
               </motion.div>
             )}
-            
+
             {isLogin && (
               <div className="forgot-password-container">
                 <button type="button" className="forgot-password-link" onClick={handleForgotPassword} disabled={isLoading}>
@@ -276,7 +276,7 @@ function Auth() {
 
           <AnimatePresence>
             {!isLogin && (
-              <motion.div 
+              <motion.div
                 className="form-group"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -285,18 +285,18 @@ function Auth() {
               >
                 <label htmlFor="auth-confirm-password" className="sr-only">Confirm Password</label>
                 <div className={`input-group ${errors.confirmPassword ? 'has-error' : ''}`}>
-                  <input 
+                  <input
                     id="auth-confirm-password"
-                    type={showConfirmPassword ? "text" : "password"} 
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
-                    placeholder="Confirm Password" 
+                    placeholder="Confirm Password"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     disabled={isLoading || isSuccess}
                   />
                   <FaLock className="input-icon" aria-hidden="true" />
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="password-toggle"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     aria-label={showConfirmPassword ? "Hide password" : "Show password"}
@@ -305,7 +305,7 @@ function Auth() {
                   </button>
                 </div>
                 {errors.confirmPassword && (
-                  <motion.div className="minimal-error" role="alert" initial={{opacity:0}} animate={{opacity:1}}>
+                  <motion.div className="minimal-error" role="alert" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     {errors.confirmPassword}
                   </motion.div>
                 )}
@@ -315,7 +315,7 @@ function Auth() {
 
           <AnimatePresence>
             {!isLogin && (
-              <motion.div 
+              <motion.div
                 className={`form-group privacy-checkbox ${errors.agreeToPrivacy ? 'has-error' : ''}`}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -338,7 +338,7 @@ function Auth() {
             )}
           </AnimatePresence>
 
-          <motion.button 
+          <motion.button
             type="submit"
             className={`submit-btn ${isLoading ? 'loading' : ''} ${isSuccess ? 'success' : ''}`}
             whileHover={(!isLoading && !isSuccess) ? { scale: 1.02 } : {}}

@@ -6,21 +6,6 @@ import "../../styles/featuredDestination.css";
 /* ── Destination data ─────────────────────────────────── */
 const destinations = [
   {
-    id: 4,
-    name: "Jawili Beach",
-    location: "Tangalan, Aklan",
-    category: "Beach",
-    tagline: "Seven Basins. One Shoreline.",
-    description:
-      "A rare coastal gem in Tangalan where a calm charcoal-sand beach meets the legendary seven-basin Jawili Falls — one of Aklan's most unique nature combinations.",
-    stats: [
-      { icon: "🌊", label: "Calm Waters" },
-      { icon: "💧", label: "Jawili Falls Nearby" },
-      { icon: "🐟", label: "Fresh Local Catch" },
-    ],
-    image: "/Images/aklantourismpictures/Jawili%20Beach/jawili1.webp",
-  },
-  {
     id: 1,
     name: "Boracay White Beach",
     location: "Malay, Aklan",
@@ -33,7 +18,37 @@ const destinations = [
       { icon: "⛵", label: "Sunset Sailing" },
       { icon: "🤿", label: "Watersports" },
     ],
-    image: "/Images/aklantourismpictures/Boracay%20White%20Beach/boracay6.webp",
+    image: "/Images/aklantourismpictures/Boracay%20White%20Beach/Boracay1.jpg",
+  },
+  {
+    id: 2,
+    name: "Puka Shell Beach",
+    location: "Malay, Aklan",
+    category: "Beach",
+    tagline: "Nature's Raw and Rugged Beauty.",
+    description:
+      "A serene, unspoiled beach at Boracay's northern tip, named for its natural puka shells. Perfect for those seeking tranquility away from the main crowds.",
+    stats: [
+      { icon: "🐚", label: "Puka Shells" },
+      { icon: "🌿", label: "Untouched Nature" },
+      { icon: "💎", label: "Crystal Clear" },
+    ],
+    image: "/Images/aklantourismpictures/Puka%20Shell%20Beach/puka2.webp",
+  },
+  {
+    id: 24,
+    name: "Diniwid Beach",
+    location: "Malay, Aklan",
+    category: "Beach",
+    tagline: "The Hidden Treasure of Boracay.",
+    description:
+      "A serene alternative just around the cliff from Station 1, offering a more private atmosphere and spectacular views of the sunset.",
+    stats: [
+      { icon: "🏠", label: "Exclusive Cove" },
+      { icon: "🌅", label: "Sunset Views" },
+      { icon: "🧗", label: "Cliffside Walk" },
+    ],
+    image: "/Images/aklantourismpictures/Diniwid%20Beach/img-20180109-wa0007-largejpg.jpg",
   },
   {
     id: 8,
@@ -49,6 +64,51 @@ const destinations = [
       { icon: "🌿", label: "Mangrove Forest" },
     ],
     image: "/Images/aklantourismpictures/BakhawanEcoPark/bakhawan3.jpg",
+  },
+  {
+    id: 10,
+    name: "Ariel's Point",
+    location: "Buruanga, Aklan",
+    category: "Nature",
+    tagline: "Ultimate Eco-Adventure Awaits.",
+    description:
+      "Aklan's premier eco-adventure destination, featuring five cliff diving platforms, kayaking, and snorkeling in the pristine waters of Buruanga.",
+    stats: [
+      { icon: "🧗", label: "Cliff Diving" },
+      { icon: "🛶", label: "Kayaking" },
+      { icon: "🤿", label: "Snorkeling" },
+    ],
+    image: "/Images/aklantourismpictures/ArielsPoint/Ariel1.webp",
+  },
+  {
+    id: 9,
+    name: "Jawili Falls",
+    location: "Tangalan, Aklan",
+    category: "Nature",
+    tagline: "Seven Basins of Pure Serenity.",
+    description:
+      "A breathtaking series of seven cascading limestone basins, each a natural swimming pool fed by crystal waters from the mountains of Tangalan.",
+    stats: [
+      { icon: "💧", label: "Seven Basins" },
+      { icon: "🏊", label: "Natural Pools" },
+      { icon: "🪨", label: "Limestone Rocks" },
+    ],
+    image: "/Images/aklantourismpictures/Jawili%20Falls/Jawilifalls2.png",
+  },
+  {
+    id: 30,
+    name: "Nabas Cold Springs",
+    location: "Nabas, Aklan",
+    category: "Nature",
+    tagline: "The Icy Heart of Nabas.",
+    description:
+      "A local favorite featuring icy, refreshing spring water flowing directly from the mountain. The perfect escape from the tropical heat.",
+    stats: [
+      { icon: "❄️", label: "Icy Fresh Water" },
+      { icon: "⛲", label: "Natural Spring" },
+      { icon: "🍃", label: "Mountain Breeze" },
+    ],
+    image: "/Images/aklantourismpictures/Bungan-bungan%20Cold%20Spring/594399325_1296448295850302_8565758133407161918_n.jpg",
   },
   {
     id: 16,
@@ -180,12 +240,11 @@ const FeaturedDestination = () => {
   };
 
   const itemReveal = {
-    hidden: { opacity: 0, y: 60, scale: 0.94, rotateX: "15deg" },
+    hidden: { opacity: 0, y: 60, scale: 0.94 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      rotateX: "0deg",
       transition: { duration: 2, ease: easeOut }
     }
   };
@@ -225,6 +284,7 @@ const FeaturedDestination = () => {
   return (
     <motion.section
       className="featured"
+      id="featured-destinations"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}

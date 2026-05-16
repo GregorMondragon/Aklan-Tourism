@@ -1,14 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../components/home/navbar';
-import Footer from '../components/home/footer';
 
 export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Navbar introComplete={true} />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div style={{
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #03082e 0%, #0a1f55 60%, #0d2d6e 100%)',
@@ -105,7 +108,6 @@ export default function NotFound() {
           </div>
         </motion.div>
       </div>
-      <Footer />
-    </>
+    </motion.div>
   );
 }

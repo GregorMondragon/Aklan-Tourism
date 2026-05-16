@@ -146,7 +146,7 @@ export default function PageIntro({ onComplete }) {
           animate={{ opacity: 1, y: 0, letterSpacing: "8px" }}
           transition={{ duration: 1.2, ease: easeOut, delay: 0.6 }}
         >
-          Discover theWonders of Aklan
+          Discover the Wonders of Aklan
         </motion.h1>
       </motion.div>
     </AnimatePresence>

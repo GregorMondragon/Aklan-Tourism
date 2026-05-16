@@ -1,16 +1,13 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/home/navbar";
 import Hero from "../components/home/hero";
 import WhyVisit from "../components/home/whyvisit";
 import FeaturedDestinations from "../components/home/featuredDestination";
-import Footer from "../components/home/footer";
 import AklanFestival from "../components/home/festivalAklan";
 import HistoricalBackground from "../components/home/historicalBackground";
 import PageIntro from "../components/home/PageIntro";
+import { motion } from "framer-motion";
 
-function Home() {
-  const [introComplete, setIntroComplete] = useState(false);
+function Home({ setIntroComplete }) {
 
   return (
     <>
@@ -22,16 +19,21 @@ function Home() {
         <meta property="og:url" content="https://aklan-tourism.vercel.app/" />
       </Helmet>
 
-      <PageIntro onComplete={() => setIntroComplete(true)} />
-      <Navbar introComplete={introComplete} />
-      <main id="main-content">
-        <Hero introComplete={introComplete} />
-        <WhyVisit />
-        <FeaturedDestinations />
-        <AklanFestival />
-        <HistoricalBackground />
-      </main>
-      <Footer />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <PageIntro onComplete={() => setIntroComplete(true)} />
+        <main id="main-content">
+          <Hero introComplete={true} />
+          <WhyVisit />
+          <FeaturedDestinations />
+          <AklanFestival />
+          <HistoricalBackground />
+        </main>
+      </motion.div>
     </>
   );
 }

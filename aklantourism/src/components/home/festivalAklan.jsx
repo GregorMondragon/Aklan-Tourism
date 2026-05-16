@@ -86,7 +86,7 @@ const AklanFestival = () => {
   };
 
   return (
-    <section className="festival-container" ref={sectionRef}>
+    <section className="festival-container" id="festivals" ref={sectionRef}>
       <motion.div
         className="grid-layout"
         initial="hidden"

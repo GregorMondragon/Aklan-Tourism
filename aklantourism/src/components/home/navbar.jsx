@@ -18,6 +18,14 @@ const navPaths = {
   "Contact Us": "/contact",
 };
 
+const homeSections = [
+  { label: "Welcome", id: "hero" },
+  { label: "Why Aklan", id: "why-visit" },
+  { label: "Top Destinations", id: "featured-destinations" },
+  { label: "Festivals", id: "festivals" },
+  { label: "Our History", id: "history" },
+];
+
 function Navbar({ introComplete = true }) {
   const [scrolled, setScrolled] = useState(false);
   const [logoRotation, setLogoRotation] = useState(0);
@@ -26,9 +34,15 @@ function Navbar({ introComplete = true }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
+  const [isMobileHomeOpen, setIsMobileHomeOpen] = useState(false);
   const searchRef = useRef(null);
   const searchInputRef = useRef(null);
   const profileRef = useRef(null);
+  const homeDropdownRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
+  const navItemsRefs = useRef([]);
+  const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0, left: 0, top: 0, width: 0, height: 0 });
   const navigate = useNavigate();
   const location = useLocation();
   const { currentUser, logout } = useAuth();
@@ -45,9 +59,47 @@ function Navbar({ introComplete = true }) {
 
   const activeNav = getActiveNav();
 
+  useEffect(() => {
+    // Wait a brief moment to ensure DOM is fully updated
+    const updateIndicator = () => {
+      const activeIndex = navItems.indexOf(activeNav);
+      if (activeIndex !== -1 && navItemsRefs.current[activeIndex]) {
+        const el = navItemsRefs.current[activeIndex];
+        setIndicatorStyle({
+          left: el.offsetLeft,
+          top: el.offsetTop,
+          width: el.offsetWidth,
+          height: el.offsetHeight,
+          opacity: 1,
+        });
+      } else {
+        setIndicatorStyle({ opacity: 0 });
+      }
+    };
+    
+    updateIndicator();
+    // Re-run on resize just to be safe
+    window.addEventListener("resize", updateIndicator);
+    return () => window.removeEventListener("resize", updateIndicator);
+  }, [activeNav, scrolled]);
+
   const handleNavClick = (item) => {
     navigate(navPaths[item]);
     setIsSearchOpen(false);
+    setIsMobileMenuOpen(false);
+    setIsHomeDropdownOpen(false);
+  };
+
+  const scrollToSection = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: sectionId } });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsHomeDropdownOpen(false);
     setIsMobileMenuOpen(false);
   };
 
@@ -104,6 +156,9 @@ function Navbar({ introComplete = true }) {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setIsProfileOpen(false);
       }
+      if (homeDropdownRef.current && !homeDropdownRef.current.contains(event.target)) {
+        setIsHomeDropdownOpen(false);
+      }
     };
 
     const handleKeyDown = (event) => {
@@ -111,6 +166,7 @@ function Navbar({ introComplete = true }) {
         setIsSearchOpen(false);
         setIsMobileMenuOpen(false);
         setIsProfileOpen(false);
+        setIsHomeDropdownOpen(false);
       }
     };
 
@@ -130,8 +186,25 @@ function Navbar({ introComplete = true }) {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Handle scroll to section from other pages
+  useEffect(() => {
+    if (location.pathname === "/" && location.state?.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      // Small delay to ensure the page is rendered
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+        // Clear state to avoid scrolling again on refresh
+        window.history.replaceState({}, document.title);
+      }, 300);
+    }
+  }, [location]);
+
   return (
     <motion.nav
+      layoutRoot
       className={scrolled ? "navbar scrolled" : "navbar"}
       initial={{ opacity: 0, y: -10 }}
       animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
@@ -160,11 +233,35 @@ function Navbar({ introComplete = true }) {
         </div>
 
         {/* Center — Navigation Links (Desktop) */}
-        <ul className="nav-links" role="list">
+        <ul className="nav-links" role="list" style={{ position: 'relative' }}>
+          <motion.div
+            className="nav-indicator"
+            style={{ position: 'absolute', inset: 'auto', zIndex: 1 }}
+            initial={{ opacity: 0 }}
+            animate={indicatorStyle}
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+          />
           {navItems.map((item, i) => (
             <motion.li
               key={item}
-              className={`nav-item ${activeNav === item ? "active-nav" : ""}`}
+              className={`nav-item ${activeNav === item ? "active-nav" : ""} ${item === "Home" ? "has-dropdown" : ""}`}
+              ref={(el) => {
+                navItemsRefs.current[i] = el;
+                if (item === "Home") homeDropdownRef.current = el;
+              }}
+              onMouseEnter={() => {
+                if (item === "Home") {
+                  if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+                  setIsHomeDropdownOpen(true);
+                }
+              }}
+              onMouseLeave={() => {
+                if (item === "Home") {
+                  hoverTimeoutRef.current = setTimeout(() => {
+                    setIsHomeDropdownOpen(false);
+                  }, 500);
+                }
+              }}
               onClick={() => handleNavClick(item)}
               onKeyDown={(e) => e.key === "Enter" && handleNavClick(item)}
               tabIndex={0}
@@ -174,18 +271,35 @@ function Navbar({ introComplete = true }) {
               animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
               transition={{ duration: 0.4, ease: easeOut, delay: 0.1 + i * 0.04 }}
             >
-              <span className="nav-item-text">{item}</span>
-              {activeNav === item && (
-                <motion.div
-                  layoutId="active-nav-indicator"
-                  className="nav-indicator"
-                  initial={false}
-                  transition={{
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 30,
-                  }}
-                />
+              <div className="nav-item-content">
+                <span className="nav-item-text">{item}</span>
+              </div>
+
+              {item === "Home" && (
+                <AnimatePresence>
+                  {isHomeDropdownOpen && (
+                    <motion.ul
+                      className="home-dropdown-menu"
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2, ease: easeOut }}
+                    >
+                      {homeSections.map((section) => (
+                        <li
+                          key={section.id}
+                          className="dropdown-item"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            scrollToSection(section.id);
+                          }}
+                        >
+                          {section.label}
+                        </li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
               )}
             </motion.li>
           ))}
@@ -224,8 +338,8 @@ function Navbar({ introComplete = true }) {
                   className="search-bar-container"
                   initial={{ width: 0, opacity: 0, originX: 1 }}
                   animate={{
-                    width: isFocused || searchQuery 
-                      ? "min(380px, 45vw)" 
+                    width: isFocused || searchQuery
+                      ? "min(380px, 45vw)"
                       : "min(280px, 35vw)",
                     opacity: 1,
                   }}
@@ -323,7 +437,12 @@ function Navbar({ introComplete = true }) {
                 style={{ cursor: 'pointer', overflow: 'hidden', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 {currentUser?.photoURL ? (
-                  <img src={currentUser.photoURL} alt="Profile" style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }} />
+                  <img
+                    src={currentUser.photoURL}
+                    alt="Profile"
+                    referrerPolicy="no-referrer"
+                    style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }}
+                  />
                 ) : (
                   <LuUser
                     className="icon profile-trigger"
@@ -369,7 +488,7 @@ function Navbar({ introComplete = true }) {
                     ) : (
                       <>
                         <div style={{ padding: '0.8rem 1rem', borderBottom: '1px solid #e2e8f0', marginBottom: '0.2rem' }}>
-                          <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Logged in as</span><br/>
+                          <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Logged in as</span><br />
                           <span style={{ fontSize: '0.95rem', color: '#0f172a', fontWeight: 600 }}>{currentUser.displayName || currentUser.email}</span>
                         </div>
                         <div className="profile-dropdown-item" onClick={() => { logout(); setIsProfileOpen(false); }} style={{ padding: '0.8rem 1rem', cursor: 'pointer', borderRadius: '8px', color: '#ef4444', transition: 'background 0.2s', fontWeight: 500 }}>
@@ -379,6 +498,9 @@ function Navbar({ introComplete = true }) {
                     )}
                     <div className="profile-dropdown-item" onClick={() => { navigate("/privacy"); setIsProfileOpen(false); }} style={{ padding: '0.8rem 1rem', cursor: 'pointer', borderRadius: '8px', color: '#0f172a', transition: 'background 0.2s', fontWeight: 500 }}>
                       Privacy & Security
+                    </div>
+                    <div className="profile-dropdown-item" onClick={() => { navigate("/copyright"); setIsProfileOpen(false); }} style={{ padding: '0.8rem 1rem', cursor: 'pointer', borderRadius: '8px', color: '#0f172a', transition: 'background 0.2s', fontWeight: 500 }}>
+                      Copyright Notice
                     </div>
                   </motion.div>
                 )}
@@ -439,14 +561,46 @@ function Navbar({ introComplete = true }) {
               {navItems.map((item) => (
                 <li
                   key={item}
-                  className={activeNav === item ? "mobile-nav-item active" : "mobile-nav-item"}
-                  onClick={() => handleNavClick(item)}
-                  onKeyDown={(e) => e.key === "Enter" && handleNavClick(item)}
+                  className={`${activeNav === item ? "mobile-nav-item active" : "mobile-nav-item"} ${item === "Home" ? "has-mobile-dropdown" : ""}`}
                   tabIndex={0}
                   role="button"
                   aria-current={activeNav === item ? "page" : undefined}
                 >
-                  {item}
+                  <div className="mobile-item-header" onClick={() => item === "Home" ? setIsMobileHomeOpen(!isMobileHomeOpen) : handleNavClick(item)}>
+                    <span>{item}</span>
+                    {item === "Home" && (
+                      <motion.span
+                        animate={{ rotate: isMobileHomeOpen ? 180 : 0 }}
+                        className="mobile-dropdown-arrow"
+                      >
+                        ▾
+                      </motion.span>
+                    )}
+                  </div>
+
+                  {item === "Home" && (
+                    <AnimatePresence>
+                      {isMobileHomeOpen && (
+                        <motion.ul
+                          className="mobile-home-sections"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: easeOut }}
+                        >
+                          {homeSections.map((section) => (
+                            <li
+                              key={section.id}
+                              className="mobile-section-link"
+                              onClick={() => scrollToSection(section.id)}
+                            >
+                              {section.label}
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  )}
                 </li>
               ))}
             </ul>

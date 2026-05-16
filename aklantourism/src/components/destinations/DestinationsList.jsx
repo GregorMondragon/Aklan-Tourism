@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "../../styles/destinationsList.css";
@@ -8,32 +8,51 @@ import { destinations } from "../../data/destinations";
 
 const categories = ["All", "Beach", "Nature", "Cultural Heritage"];
 
-// ── Smooth spring used everywhere for consistent feel
-const spring = { type: "spring", stiffness: 260, damping: 28 };
-const easeOut = [0.16, 1, 0.3, 1];
+// ── Easing curves
+const easeOut  = [0.25, 0.46, 0.45, 0.94];   // silky easeOutQuad
+const easeBack = [0.34, 1.36, 0.64, 1];       // slight overshoot on enter
 
-// ── Cards: staggered fade-up on filter change (~3s total with stagger)
+// ── Grid: cinematic blur+scale swap (GPU-only — no layout cost)
+const gridVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.97,
+    filter: "blur(6px)",
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.38, ease: easeOut },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.97,
+    filter: "blur(6px)",
+    transition: { duration: 0.22, ease: "easeIn" },
+  },
+};
+
+// ── Cards: staggered blur-clearing reveal
+//   Cap delay at card #8 so even 30 cards never feel sluggish
 const cardVariants = {
-  hidden: { opacity: 0, y: 36, scale: 0.96 },
+  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 1.0, ease: easeOut, delay: 0.9 + i * 0.09 },
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.42,
+      ease: easeOut,
+      delay: Math.min(i, 8) * 0.055,
+    },
   }),
-  exit: { opacity: 0, scale: 0.94, y: -14, transition: { duration: 0.3, ease: "easeIn" } },
 };
 
-// ── Sidebar: glides in from the left
+// ── Sidebar: glides in from left (first mount only)
 const sidebarVariants = {
   hidden: { opacity: 0, x: -44 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1.1, ease: easeOut, delay: 0.7 } },
-};
-
-// ── Grid wrapper: fades in just before cards arrive
-const gridVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.8, ease: "easeOut", delay: 0.8 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 1.1, ease: easeOut, delay: 0.3 } },
 };
 
 export default function DestinationsList() {
@@ -169,217 +188,235 @@ export default function DestinationsList() {
     fetchWeather();
   }, []);
 
-  if (selectedDestination) {
-    return (
-      <AnimatePresence mode="wait">
-        <DestinationDetails
-          key={selectedDestination.id}
-          destination={selectedDestination}
-          onBack={() => setSelectedDestination(null)}
-          onSelectDestination={setSelectedDestination}
-        />
-      </AnimatePresence>
-    );
-  }
-
   const filtered =
     activeCategory === "All"
       ? destinations
       : destinations.filter((d) => d.category === activeCategory);
 
   return (
-    <section className="dest-section">
-      {/* Hero Banner */}
-      <div className="dest-hero">
-        <div className="dest-hero-overlay" />
-        <motion.h1
-          className="dest-hero-title"
-          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.3, ease: easeOut, delay: 0.1 }}
-        >
-          Aklan: <span>Explore the Undiscovered</span>
-        </motion.h1>
-
-        {/* Filter Tabs */}
-        <motion.div
-          className="dest-filters"
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.0, delay: 0.55, ease: easeOut }}
-        >
-          {categories.map((cat, idx) => (
-            <motion.button
-              key={cat}
-              className={`dest-filter-btn ${activeCategory === cat ? "active" : ""}`}
-              onClick={() => setActiveCategory(cat)}
-              whileHover={{ scale: 1.06, backgroundColor: activeCategory === cat ? "#fff" : "rgba(11,31,69,0.07)" }}
-              whileTap={{ scale: 0.93 }}
-              transition={spring}
-              layout
-            >
-              {cat}
-            </motion.button>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Main Content */}
-      <div className="dest-content">
-        {/* Sidebar */}
-        <motion.aside
-          className="dest-sidebar"
-          variants={sidebarVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="sidebar-logo-wrap">
-            <img src="/Images/finallogo.png" alt="Aklan Tourism" className="sidebar-logo" />
-
-          </div>
-
-          <div className="sidebar-weather">
-            <motion.div
-              className="weather-row"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="weather-icon">{weatherData.boracay.icon}</span>
-              <div>
-                <strong>BORACAY: {weatherData.boracay.loading ? "..." : `${weatherData.boracay.temp}°C`}</strong>
-                <p>{weatherData.boracay.loading ? "Loading..." : weatherData.boracay.condition}</p>
-              </div>
-            </motion.div>
-            <motion.div
-              className="weather-row"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <span className="weather-icon">{weatherData.kalibo.icon}</span>
-              <div>
-                <strong>KALIBO: {weatherData.kalibo.loading ? "..." : `${weatherData.kalibo.temp}°C`}</strong>
-                <p>{weatherData.kalibo.loading ? "Loading..." : weatherData.kalibo.condition}</p>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="sidebar-map">
-            <p className="map-title">PROVINCE MAP</p>
-            <motion.div
-              className="map-container"
-              onClick={() => setIsMapExpanded(true)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              layoutId="aklan-map-small"
-            >
-              <img src="/Images/aklanmapfinal.png" alt="Map of Aklan" className="static-map" />
-              <div className="map-hover-hint">Expand Map</div>
-            </motion.div>
-          </div>
-
-          <div className="sidebar-status">
-            <strong>AKLAN STATUS:</strong>
-            <p>Fully Open for Tourism.</p>
-          </div>
-        </motion.aside>
-
-        {/* Cards Grid */}
-        <motion.div
-          className="dest-grid"
-          variants={gridVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((dest, i) => (
-              <motion.div
-                key={dest.id}
-                className="dest-card"
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                layout
-                layoutId={`card-${dest.id}`}
-                whileHover={{ boxShadow: "0 16px 48px rgba(11,31,69,0.14)", transition: { duration: 1, ease: easeOut } }}
-                whileTap={{ scale: 0.98, transition: { duration: 0.12 } }}
-              >
-                <div className="dest-card-img-wrap">
-                  <img src={dest.image} alt={`${dest.name} in ${dest.location}`} className="dest-card-img" loading="lazy" />
-                  <motion.span
-                    className="dest-card-tag"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.055 + 0.2, duration: 0.3, ease: easeOut }}
-                  >
-                    {dest.category}
-                  </motion.span>
-                </div>
-                <div className="dest-card-body">
-                  <h3>{dest.name}</h3>
-                  {dest.location && (
-                    <span className="dest-card-location">📍 {dest.location}</span>
-                  )}
-                  <p>{dest.description}</p>
-                  <motion.button
-                    className="dest-card-btn"
-                    onClick={() => setSelectedDestination(dest)}
-                    whileHover={{ scale: 1.05, backgroundColor: "#0b1f45", color: "#fff", borderColor: "#0b1f45" }}
-                    whileTap={{ scale: 0.94 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                  >
-                    View Details
-                  </motion.button>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-
-      {/* Expanded Map Overlay */}
-      <AnimatePresence>
-        {isMapExpanded && (
+    <div className="destinations-container-outer">
+      <AnimatePresence mode="sync">
+        {selectedDestination ? (
           <motion.div
-            className="map-overlay"
+            key="details"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: easeOut }}
-            onClick={() => setIsMapExpanded(false)}
-            data-lenis-prevent
+            style={{ flex: 1 }}
           >
-            <motion.div
-              className="expanded-map-wrap"
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                className="map-close-btn"
-                onClick={() => setIsMapExpanded(false)}
-                aria-label="Close province map"
-              >
-                ✕
-              </button>
-              <img
-                src="/Images/aklanmapfinal.png"
-                alt="Aklan Province Map"
-                className="expanded-map-img"
-              />
-              <div className="expanded-map-footer">
-                <h3>Province of Aklan</h3>
-                <p>Gateway to Paradise • 17 Municipalities</p>
+            <DestinationDetails
+              destination={selectedDestination}
+              onBack={() => setSelectedDestination(null)}
+              onSelectDestination={setSelectedDestination}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="list"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: easeOut }}
+            style={{ flex: 1 }}
+          >
+            <section className="dest-section">
+              {/* Hero Banner */}
+              <div className="dest-hero">
+                <div className="dest-hero-overlay" />
+                <motion.h1
+                  className="dest-hero-title"
+                  initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 1.3, ease: easeOut, delay: 0.1 }}
+                >
+                  Aklan: <span>Explore the Undiscovered</span>
+                </motion.h1>
+
+                {/* Filter Tabs — spring sliding pill */}
+                <motion.div
+                  className="dest-filters"
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 1.0, delay: 0.55, ease: easeOut }}
+                >
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      className={`dest-filter-btn ${activeCategory === cat ? "active" : ""}`}
+                      onClick={() => setActiveCategory(cat)}
+                    >
+                      {/* Sliding active pill — only one layoutId, very cheap */}
+                      {activeCategory === cat && (
+                        <motion.span
+                          className="filter-pill"
+                          layoutId="filter-active-pill"
+                          transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                        />
+                      )}
+                      <span className="filter-label">{cat}</span>
+                    </button>
+                  ))}
+                </motion.div>
               </div>
-            </motion.div>
+
+              {/* Main Content */}
+              <div className="dest-content">
+                {/* Sidebar */}
+                <motion.aside
+                  className="dest-sidebar"
+                  variants={sidebarVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <div className="sidebar-logo-wrap">
+                    <img src="/Images/finallogo.png" alt="Aklan Tourism" className="sidebar-logo" />
+
+                  </div>
+
+                  <div className="sidebar-weather">
+                    <motion.div
+                      className="weather-row"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <span className="weather-icon">{weatherData.boracay.icon}</span>
+                      <div>
+                        <strong>BORACAY: {weatherData.boracay.loading ? "..." : `${weatherData.boracay.temp}°C`}</strong>
+                        <p>{weatherData.boracay.loading ? "Loading..." : weatherData.boracay.condition}</p>
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      className="weather-row"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                      <span className="weather-icon">{weatherData.kalibo.icon}</span>
+                      <div>
+                        <strong>KALIBO: {weatherData.kalibo.loading ? "..." : `${weatherData.kalibo.temp}°C`}</strong>
+                        <p>{weatherData.kalibo.loading ? "Loading..." : weatherData.kalibo.condition}</p>
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  <div className="sidebar-map">
+                    <p className="map-title">PROVINCE MAP</p>
+                    <motion.div
+                      className="map-container"
+                      onClick={() => setIsMapExpanded(true)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      layoutId="aklan-map-small"
+                    >
+                      <img src="/Images/aklanmapfinal.png" alt="Map of Aklan" className="static-map" />
+                      <div className="map-hover-hint">Expand Map</div>
+                    </motion.div>
+                  </div>
+
+                  <div className="sidebar-status">
+                    <strong>AKLAN STATUS:</strong>
+                    <p>Fully Open for Tourism.</p>
+                  </div>
+                </motion.aside>
+
+                {/* Cards Grid — keyed by category for clean swap */}
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={activeCategory}
+                    className="dest-grid"
+                    variants={gridVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    {filtered.map((dest, i) => (
+                      <motion.div
+                        key={dest.id}
+                        className="dest-card"
+                        custom={i}
+                        variants={cardVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover={{
+                          y: -6,
+                          boxShadow: "0 24px 48px rgba(11,31,69,0.16)",
+                          transition: { duration: 0.28, ease: easeOut },
+                        }}
+                        whileTap={{ scale: 0.98, transition: { duration: 0.12 } }}
+                        style={{ willChange: "transform, opacity" }}
+                      >
+                        <div className="dest-card-img-wrap">
+                          <img src={dest.image} alt={`${dest.name} in ${dest.location}`} className="dest-card-img" loading="lazy" />
+                          <span className="dest-card-tag">{dest.category}</span>
+                        </div>
+                        <div className="dest-card-body">
+                          <h3>{dest.name}</h3>
+                          {dest.location && (
+                            <span className="dest-card-location">📍 {dest.location}</span>
+                          )}
+                          <p>{dest.description}</p>
+                          <motion.button
+                            className="dest-card-btn"
+                            onClick={() => setSelectedDestination(dest)}
+                            whileHover={{ scale: 1.05, backgroundColor: "#0b1f45", color: "#fff", borderColor: "#0b1f45" }}
+                            whileTap={{ scale: 0.94 }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                          >
+                            View Details
+                          </motion.button>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Expanded Map Overlay */}
+              <AnimatePresence>
+                {isMapExpanded && (
+                  <motion.div
+                    className="map-overlay"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: easeOut }}
+                    onClick={() => setIsMapExpanded(false)}
+                    data-lenis-prevent
+                  >
+                    <motion.div
+                      className="expanded-map-wrap"
+                      initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                      animate={{ scale: 1, opacity: 1, y: 0 }}
+                      exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <button
+                        className="map-close-btn"
+                        onClick={() => setIsMapExpanded(false)}
+                        aria-label="Close province map"
+                      >
+                        ✕
+                      </button>
+                      <img
+                        src="/Images/aklanmapfinal.png"
+                        alt="Aklan Province Map"
+                        className="expanded-map-img"
+                      />
+                      <div className="expanded-map-footer">
+                        <h3>Province of Aklan</h3>
+                        <p>Gateway to Paradise • 17 Municipalities</p>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </section>
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </div>
   );
 }

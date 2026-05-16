@@ -1,47 +1,73 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { FaArrowLeft, FaShieldAlt, FaLock, FaUserSecret } from "react-icons/fa";
+import { LuShieldCheck, LuLock, LuEyeOff, LuFileText } from "react-icons/lu";
 import "../styles/privacy.css";
 
 function Privacy() {
+  const easeOut = [0.16, 1, 0.3, 1];
+
   return (
-    <div className="privacy-container">
-      <Link to="/" className="back-home">
-        <FaArrowLeft /> Back to Home
-      </Link>
+    <motion.div
+      className="privacy-page-wrapper"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: easeOut }}
+    >
+      <div className="privacy-container">
+        <motion.div
+          className="privacy-content"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: easeOut }}
+        >
+          <header className="privacy-header">
+            <div className="badge">Official Policy</div>
+            <h2>Privacy & Security</h2>
+            <p>Our commitment to protecting your digital footprint is absolute. Explore how we manage your data with transparency and military-grade security standards.</p>
+          </header>
 
-      <motion.div 
-        className="privacy-content"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="privacy-header">
-          <h2>Privacy & Security</h2>
-          <p>Your trust is our top priority. Learn how we protect your data.</p>
-        </div>
+          <div className="privacy-sections">
+            <motion.section
+              className="privacy-card"
+              whileHover={{ y: -10, transition: { duration: 0.4, ease: easeOut } }}
+            >
+              <div className="icon-box">
+                <LuShieldCheck className="privacy-icon" />
+              </div>
+              <h3>Data Protection</h3>
+              <p>We utilize advanced AES-256 bit encryption to ensure that any personal information shared on this platform is shielded from unauthorized access. Our systems undergo regular security audits to maintain the highest levels of integrity.</p>
+            </motion.section>
 
-        <div className="privacy-sections">
-          <section className="privacy-card">
-            <FaShieldAlt className="privacy-icon" />
-            <h3>Data Protection</h3>
-            <p>We use industry-standard security measures, including Google Authentication, to ensure your personal information is protected from unauthorized access.</p>
-          </section>
+            <motion.section
+              className="privacy-card"
+              whileHover={{ y: -10, transition: { duration: 0.4, ease: easeOut } }}
+            >
+              <div className="icon-box">
+                <LuLock className="privacy-icon" />
+              </div>
+              <h3>Secure Access</h3>
+              <p>All authentication processes are managed via Firebase and Google OAuth 2.0 protocols. This means we never store, see, or have access to your personal passwords. Your session data is tokenized and stored securely in your browser.</p>
+            </motion.section>
 
-          <section className="privacy-card">
-            <FaLock className="privacy-icon" />
-            <h3>Secure Authentication</h3>
-            <p>Your passwords and login credentials are not stored on our servers. We use Firebase Authentication to handle sign-ins securely via OAuth and encrypted methods.</p>
-          </section>
+            <motion.section
+              className="privacy-card"
+              whileHover={{ y: -10, transition: { duration: 0.4, ease: easeOut } }}
+            >
+              <div className="icon-box">
+                <LuEyeOff className="privacy-icon" />
+              </div>
+              <h3>Privacy Controls</h3>
+              <p>We follow a "Privacy by Design" philosophy. We only collect the minimal data required for your account (name and email). You retain full rights to your data, including the right to request deletion at any time.</p>
+            </motion.section>
+          </div>
 
-          <section className="privacy-card">
-            <FaUserSecret className="privacy-icon" />
-            <h3>Data Collection</h3>
-            <p>We only collect data that is necessary to improve your experience, such as your profile picture and email when you log in. We will never sell your personal data to third parties.</p>
-          </section>
-        </div>
-      </motion.div>
-    </div>
+          <div className="privacy-footer">
+            <p className="footer-main">© Wonders of Aklan • Privacy & Security Standards</p>
+
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 

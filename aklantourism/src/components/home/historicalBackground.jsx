@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 import "../../styles/historicalBackground.css";
 
@@ -12,11 +12,10 @@ function SplitWord({ text, className, delay = 0, wordDelay = 0.05 }) {
         <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "pre" }}>
           <motion.span
             variants={{
-              hidden: { opacity: 0, y: 12, filter: "blur(3px)" },
+              hidden: { opacity: 0, y: 12 },
               visible: {
                 opacity: 1,
                 y: 0,
-                filter: "blur(0px)",
                 transition: {
                   type: "spring", damping: 15, stiffness: 250,
                   delay: delay + (wordIndex * wordDelay)
@@ -55,20 +54,11 @@ const HistoricalBackground = () => {
     offset: ["start end", "end start"]
   });
 
-  // Smooth spring physics for parallax
-  const springConfig = { damping: 30, stiffness: 100, mass: 0.5 };
-
-  const yImage1Raw = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const yImage1 = useSpring(yImage1Raw, springConfig);
-
-  const yText1Raw = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const yText1 = useSpring(yText1Raw, springConfig);
-
-  const yImage2Raw = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const yImage2 = useSpring(yImage2Raw, springConfig);
-
-  const yText2Raw = useTransform(scrollYProgress, [0, 1], [0, -160]);
-  const yText2 = useSpring(yText2Raw, springConfig);
+  // Parallax offsets for depth effect
+  const yImage1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yText1 = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const yImage2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const yText2 = useTransform(scrollYProgress, [0, 1], [0, -160]);
 
   const premiumEase = [0.16, 1, 0.3, 1];
 
@@ -109,33 +99,64 @@ const HistoricalBackground = () => {
   };
 
   const staggerContainer = {
-    hidden: {},
+    hidden: { opacity: 0 },
     visible: {
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+      opacity: 1
     }
   };
 
+  const introBlockVariant = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: premiumEase
+      }
+    }
+  };
+
+  const itemFadeUp = {
+    hidden: { y: 30, opacity: 0 },
+    visible: (customDelay = 0) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: premiumEase,
+        delay: customDelay,
+        staggerChildren: 0.2,
+        delayChildren: customDelay + 0.1
+      }
+    })
+  };
+
   return (
-    <section className="history-container" ref={sectionRef}>
+    <section className="history-container" id="history" ref={sectionRef}>
       <div className="history-bg-accent"></div>
       <div className="history-bg-accent-2"></div>
 
-      <div className="history-content-wrapper">
+      <motion.div
+        className="history-content-wrapper"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.1 }}
+      >
 
         {/* Intro Block */}
         <motion.div
           className="history-intro-block"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.1 }}
+          variants={introBlockVariant}
         >
           <motion.div
             className="history-badge"
             variants={{
-              hidden: { opacity: 0, scale: 0.5, y: 30 },
+              hidden: { opacity: 0, scale: 0.8, y: 20 },
               visible: {
                 opacity: 1, scale: 1, y: 0,
-                transition: { type: "spring", stiffness: 250, damping: 15, delay: 0.2 }
+                transition: { type: "spring", stiffness: 200, damping: 15, delay: 0.1 }
               }
             }}
           >
@@ -157,21 +178,18 @@ const HistoricalBackground = () => {
           <p className="history-intro-text">
             <SplitWord
               text="Aklan is situated in the Western Visayas region of the Philippines. It is divided into 327 Barangays grouped into 17 Municipalities of which Kalibo is considered the Capital Town."
-              delay={1.1}
-              wordDelay={0.05}
+              delay={2}
+              wordDelay={0.03}
             />
           </p>
         </motion.div>
 
         {/* Row 1: The Oldest Province */}
-        <div className="history-row">
+        <motion.div className="history-row" variants={itemFadeUp} custom={2.5}>
           {/* Parallax Wrapper separated from Animation */}
-          <motion.div style={{ y: yImage1, willChange: 'transform' }}>
+          <motion.div style={{ y: yImage1, willChange: 'transform' }} className="history-image-col">
             <motion.div
               className="history-image-container"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.1 }}
               variants={slideLeft}
             >
               <img
@@ -188,9 +206,6 @@ const HistoricalBackground = () => {
           <motion.div style={{ y: yText1, willChange: 'transform' }} className="history-text-col">
             <motion.div
               className="history-text-card"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.1 }}
               variants={slideRight}
             >
               <motion.div className="history-year" variants={fadeUp}>1956</motion.div>
@@ -202,17 +217,14 @@ const HistoricalBackground = () => {
               </motion.p>
             </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Row 2: The Bornean Datus (Text Left, Map Right) */}
-        <div className="history-row reverse">
+        <motion.div className="history-row reverse" variants={itemFadeUp} custom={2.8}>
           {/* Parallax Wrapper */}
           <motion.div style={{ y: yText2, willChange: 'transform' }} className="history-text-col">
             <motion.div
               className="history-text-card"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.1 }}
               variants={slideLeft}
             >
               <motion.div className="history-year" variants={fadeUp}>1250</motion.div>
@@ -234,22 +246,19 @@ const HistoricalBackground = () => {
           </motion.div>
 
           {/* Parallax Wrapper */}
-          <motion.div style={{ y: yImage2, willChange: 'transform' }} className="history-map-container">
+          <motion.div style={{ y: yImage2, willChange: 'transform' }} className="history-secondary-image-container">
             <motion.img
-              src="/Images/aklan_map_colored.png"
-              alt="Colored Map of Aklan Municipalities"
-              className="history-map-img"
+              src="/Images/atiold.jpg"
+              alt="Historical photo of Ati ancestors"
+              className="history-secondary-img"
               loading="lazy"
               decoding="async"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.1 }}
               variants={slideRight}
             />
           </motion.div>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
 
       {/* Full Story Modal */}
       <AnimatePresence>

@@ -1,6 +1,5 @@
+import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/home/navbar";
-import Footer from "../components/home/footer";
 import DestinationsList from "../components/destinations/DestinationsList";
 
 function Destinations() {
@@ -14,11 +13,16 @@ function Destinations() {
         <meta property="og:url" content="https://aklan-tourism.vercel.app/destinations" />
       </Helmet>
 
-      <Navbar introComplete={true} />
-      <main id="main-content">
-        <DestinationsList />
-      </main>
-      <Footer />
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <main id="main-content">
+          <DestinationsList />
+        </main>
+      </motion.div>
     </>
   );
 }

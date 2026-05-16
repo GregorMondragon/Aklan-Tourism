@@ -28,46 +28,6 @@ const REASONS = [
   },
 ];
 
-// Helper component for premium character-by-character typing effect
-function SplitText({ text, className, delay = 0, charDelay = 0.03 }) {
-  const words = text.split(" ");
-  return (
-    <span className={className} style={{ display: "inline-block" }}>
-      {words.map((word, wordIndex) => (
-        <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "pre" }}>
-          {word.split("").map((char, charIndex) => {
-            const previousCharsLength = words.slice(0, wordIndex).join(" ").length;
-            const spaceCount = wordIndex > 0 ? 1 : 0;
-            const globalIndex = previousCharsLength + spaceCount + charIndex;
-
-            return (
-              <motion.span
-                key={charIndex}
-                variants={{
-                  hidden: { opacity: 0, y: 15, scale: 0.8 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    transition: {
-                      type: "spring", damping: 15, stiffness: 350,
-                      delay: delay + (globalIndex * charDelay)
-                    },
-                  },
-                }}
-                style={{ display: "inline-block" }}
-              >
-                {char}
-              </motion.span>
-            );
-          })}
-          {wordIndex < words.length - 1 && <span> </span>}
-        </span>
-      ))}
-    </span>
-  );
-}
-
 // Helper component for word-by-word reveal effect
 function SplitWord({ text, className, delay = 0, wordDelay = 0.05 }) {
   const words = text.split(" ");
@@ -166,11 +126,10 @@ function TiltCard({ children, variants, customDelay }) {
 
 function WhyVisit() {
   const cardVariants = {
-    hidden: { opacity: 0, y: 80, rotateX: 15, scale: 0.95 },
+    hidden: { opacity: 0, y: 80, scale: 0.95 },
     visible: (customDelay) => ({
       opacity: 1,
       y: 0,
-      rotateX: 0,
       scale: 1,
       transition: {
         duration: 1.4,

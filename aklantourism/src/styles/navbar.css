@@ -107,6 +107,11 @@ body.details-open .navbar .nav-container {
   justify-content: center;
   white-space: nowrap;
   user-select: none;
+  border: 1px solid transparent;
+}
+
+.nav-links li.nav-item:hover {
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .nav-links li.nav-item:hover .nav-item-text {
@@ -146,6 +151,74 @@ body.details-open .navbar .nav-container {
   z-index: 1;
 }
 
+/* ── Home Dropdown ──────────────────────── */
+.nav-item.has-dropdown {
+  position: relative;
+}
+
+.nav-item-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-item:hover .nav-item-text {
+  color: #fff;
+}
+
+.home-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  background: rgba(13, 17, 28, 0.92);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 10px;
+  min-width: 190px;
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  list-style: none;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Add a pointer/triangle to the dropdown */
+.home-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 24px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-item {
+  padding: 11px 18px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.88rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transform: translateX(5px);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.02);
+}
+
 /* ── Right Section (icons + search) ────── */
 .nav-right-section {
   display: flex;
@@ -175,8 +248,8 @@ body.details-open .navbar .nav-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -482,6 +555,55 @@ input[type="search"]::-webkit-search-results-decoration {
 .mobile-nav-item:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: -2px;
+}
+
+/* ── Mobile Home Dropdown ────────────────── */
+.mobile-nav-item.has-mobile-dropdown {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+}
+
+.mobile-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  width: 100%;
+}
+
+.mobile-dropdown-arrow {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.mobile-home-sections {
+  list-style: none;
+  padding: 0 0 10px 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 0 14px 14px;
+}
+
+.mobile-section-link {
+  padding: 12px 40px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.mobile-section-link:last-child {
+  border-bottom: none;
+}
+
+.mobile-section-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  padding-left: 44px;
 }
 
 /* ── Mobile search row in the drawer ─── */

@@ -16,7 +16,7 @@ const ScrollToTop = () => {
     if (lenis) {
       lenis.scrollTo(0, { immediate: true });
     } else {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     }
   }, [pathname, search, hash, lenis]);
 

@@ -1,6 +1,5 @@
+import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/home/navbar";
-import Footer from "../components/home/footer";
 import AboutComponent from "../components/about/about";
 
 function About() {
@@ -14,11 +13,16 @@ function About() {
         <meta property="og:url" content="https://aklan-tourism.vercel.app/about" />
       </Helmet>
 
-      <Navbar introComplete={true} />
-      <main id="main-content">
-        <AboutComponent />
-      </main>
-      <Footer />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <main id="main-content">
+          <AboutComponent />
+        </main>
+      </motion.div>
     </>
   );
 }

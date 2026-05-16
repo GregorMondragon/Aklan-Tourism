@@ -6,12 +6,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Remove fixed height — let content drive it */
   min-height: 0;
   overflow: hidden;
-  /* Create a new stacking context to stabilize rendering */
   isolation: isolate;
-  perspective: 1000px;
 }
 
 .grid-layout {
@@ -30,12 +27,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* Stabilize parallax movement */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  transform: translate3d(0,0,0);
-  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .image-wrapper img {
@@ -44,7 +38,7 @@
   object-fit: cover;
   display: block;
   /* Force GPU acceleration with broader browser support */
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   /* Limit repaint area */
@@ -58,15 +52,15 @@
   --_m: conic-gradient(#000 0 0) no-repeat;
   --_s: 45% 45%;
   mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   -webkit-mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   filter: grayscale();
   /* Specific transitions to prevent Firefox repaint loops */
   transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -87,7 +81,7 @@
 }
 
 .image-wrapper:hover img {
-  transform: scale(1.1) translate3d(0,0,0);
+  transform: scale(1.1) translate3d(0, 0, 0);
 }
 
 .small-wide {
@@ -95,15 +89,15 @@
   --_m: conic-gradient(#000 0 0) no-repeat;
   --_s: 45% 45%;
   mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   -webkit-mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   filter: grayscale();
   /* Specific transitions to prevent Firefox repaint loops */
   transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -118,15 +112,15 @@
   --_m: conic-gradient(#000 0 0) no-repeat;
   --_s: 45% 45%;
   mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   -webkit-mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   filter: grayscale();
   /* Specific transitions to prevent Firefox repaint loops */
   transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -141,15 +135,15 @@
   --_m: conic-gradient(#000 0 0) no-repeat;
   --_s: 45% 45%;
   mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   -webkit-mask:
-    var(--_m) left   var(--_i, 0%) top    10%           / var(--_s),
-    var(--_m) bottom var(--_i, 0%) left   10%           / var(--_s),
-    var(--_m) top    var(--_i, 0%) right  10%           / var(--_s),
-    var(--_m) right  var(--_i, 0%) bottom 10%           / var(--_s);
+    var(--_m) left var(--_i, 0%) top 10% / var(--_s),
+    var(--_m) bottom var(--_i, 0%) left 10% / var(--_s),
+    var(--_m) top var(--_i, 0%) right 10% / var(--_s),
+    var(--_m) right var(--_i, 0%) bottom 10% / var(--_s);
   filter: grayscale();
   /* Specific transitions to prevent Firefox repaint loops */
   transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), --_i 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -165,12 +159,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Stabilize parallax movement */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  transform: translate3d(0,0,0);
-  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .title {
