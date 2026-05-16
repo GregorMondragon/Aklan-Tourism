@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import Navbar from '../components/home/navbar';
 
 export default function NotFound() {
@@ -12,6 +13,7 @@ export default function NotFound() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
+      <SEO title="Page Not Found" />
       <div style={{
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #03082e 0%, #0a1f55 60%, #0d2d6e 100%)',

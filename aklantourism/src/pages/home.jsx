@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 import Hero from "../components/home/hero";
 import WhyVisit from "../components/home/whyvisit";
 import FeaturedDestinations from "../components/home/featuredDestination";
@@ -11,13 +11,10 @@ function Home({ setIntroComplete }) {
 
   return (
     <>
-      <Helmet>
-        <title>Aklan Tourism — Discover the Wonders of Aklan, Philippines</title>
-        <meta name="description" content="Explore Aklan's world-class beaches, vibrant festivals, and breathtaking nature. Your guide to Boracay White Beach, Jawili Falls, Bakhawan Eco-Park, and the Ati-Atihan Festival." />
-        <meta property="og:title" content="Aklan Tourism — Gateway to Paradise" />
-        <meta property="og:description" content="Discover world-class beaches, the Ati-Atihan Festival, and breathtaking natural wonders across Aklan, Philippines." />
-        <meta property="og:url" content="https://aklan-tourism.vercel.app/" />
-      </Helmet>
+      <SEO 
+        title="Home"
+        url="/"
+      />
 
       <motion.div
         initial={{ opacity: 0 }}
